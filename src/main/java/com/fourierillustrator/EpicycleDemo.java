@@ -32,7 +32,7 @@ public class EpicycleDemo extends Application {
     @Override
     public void start(Stage stage) {
 
-        group = new Epicycle[]{new Epicycle(150, 2 * Math.PI), new Epicycle(50, Math.PI)};
+        group = new Epicycle[]{new Epicycle(150, Math.PI), new Epicycle(50, 2 * Math.PI)};
         
         Pane pane = new Pane();
         Visualization v = new Visualization(pane, group);
@@ -47,7 +47,5 @@ public class EpicycleDemo extends Application {
         stage.show();
         v.setShowCircles(false);
     }
-    
-    
 }
 

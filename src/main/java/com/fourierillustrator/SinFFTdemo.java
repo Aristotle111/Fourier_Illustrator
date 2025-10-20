@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 import org.jtransforms.fft.DoubleFFT_1D;
 
-public class SinFFT {
+public class SinFFTdemo {
     static double dt;
     static int size;
     public static void main(String[] args) {
