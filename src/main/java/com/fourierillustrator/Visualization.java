@@ -46,8 +46,8 @@ public class Visualization {
     }
 
     public void setEpicycles(Epicycle[] epicycles) {
-        if (epicycles != null) {
-            for (Epicycle e : epicycles) {
+        if (this.epicycles != null) {
+            for (Epicycle e : this.epicycles) {
                 pane.getChildren().remove(e.arrowShaft);
                 pane.getChildren().remove(e.circle);
             }
