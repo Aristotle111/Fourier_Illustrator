@@ -5,7 +5,6 @@ package com.fourierillustrator;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 //CREATE TWO SEPERATE FILES
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -45,7 +44,7 @@ public class EpicycleDemo extends Application {
         Scene scene = new Scene(root, 900, 900);
         stage.setScene(scene);      
         stage.show();
-        v.setShowCircles(false);
+        v.setShowCircles(true);
     }
 }
 

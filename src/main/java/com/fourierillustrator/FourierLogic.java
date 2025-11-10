@@ -1,12 +1,7 @@
 package com.fourierillustrator;
 
-import java.awt.List;
 import java.util.Comparator;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
-import java.util.Map;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
 
 import org.jtransforms.fft.DoubleFFT_1D;
 

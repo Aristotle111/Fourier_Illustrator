@@ -1,8 +1,5 @@
 package com.fourierillustrator;
 
-import java.util.LinkedList;
-import java.util.Map;
-
 import javafx.animation.AnimationTimer;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -89,15 +86,13 @@ public class DrawingVisualization {
             lastUpdate = currentTime;
             drawingVisual.getPoints().addAll(x, y);
         }
-
-        void printData() {
-            for (Double entry : drawingVisual.getPoints()) {
-                System.out.print(entry + ", ");
-            }
-        }
     }
 
     public void setMultiplier(double multiplier) {
         v.setMultiplier(multiplier);
+    }
+
+    public void setShowCircles(boolean showCircles) {
+        v.setShowCircles(showCircles);
     }
 }

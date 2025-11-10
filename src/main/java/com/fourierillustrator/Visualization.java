@@ -47,7 +47,7 @@ public class Visualization {
 
     public void setEpicycles(Epicycle[] epicycles) {
         if (epicycles != null) {
-            for (Epicycle e : this.epicycles) {
+            for (Epicycle e : epicycles) {
                 pane.getChildren().remove(e.arrowShaft);
                 pane.getChildren().remove(e.circle);
             }
@@ -89,8 +89,6 @@ public class Visualization {
         final double DELTA_T = 1000; //nanoseconds, sample frequency = 1000000000/delta_t 
         long lastUpdate = 0;
         long startTime = -1;
-        //double startX;
-        //double startY;
         long currentTime;
         boolean isPaused = false;
         
