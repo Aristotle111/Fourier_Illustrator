@@ -14,7 +14,7 @@ public class DrawingDemo extends Application {
     public void start(Stage stage) {
         Pane canvas = new Pane();
         DrawingVisualization dv = new DrawingVisualization(canvas);
-        dv.setMultiplier(.5);
+        dv.setMultiplier(0.5);
         Scene scene = new Scene(canvas, 900, 900);
         stage.setScene(scene);
         stage.show();
