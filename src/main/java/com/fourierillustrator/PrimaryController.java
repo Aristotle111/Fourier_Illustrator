@@ -1,33 +1,34 @@
 package com.fourierillustrator;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
-
-import com.fourierillustrator.DrawingVisualization;
+import javafx.scene.layout.VBox;
 
 public class PrimaryController {
 
+    @FXML private Button changeSceneButton1;
     @FXML private Pane mainPane;
     @FXML private ToggleButton showStrokeToggle;
     @FXML private RadioButton strokeSizeSmall;
     @FXML private RadioButton strokeSizeMedium;
     @FXML private RadioButton strokeSizeLarge;
     @FXML private ChoiceBox<String> sceneSelector;
+    @FXML private Button playButton;
+    @FXML private Button pauseButton;
+    @FXML private Button resetButton;
+    @FXML private VBox sceneSelectorBox1;
 
     @FXML
     public void initialize() {
         DrawingVisualization dv = new DrawingVisualization(mainPane);
         dv.setMultiplier(.5);
-
-        ObservableList<String> choices = FXCollections.observableArrayList("Scene 1", "Scene 2");
-            sceneSelector.setItems(choices);
-            sceneSelector.getSelectionModel().selectFirst();
     }
+
+
 
     @FXML
     public void switchScene() {

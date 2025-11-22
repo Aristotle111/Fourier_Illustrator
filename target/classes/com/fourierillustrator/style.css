@@ -1,0 +1,17 @@
+.sceneSelector > .label {
+    -fx-font-size: 22px;
+    -fx-alignment: center;
+}
+
+.sceneSelector .menuItem > .label {
+    -fx-font-size: 20px;
+}
+
+.sceneSelector2 > .label {
+    -fx-font-size: 22px;
+    -fx-alignment: center;
+}
+
+.sceneSelector2 .menuItem > .label {
+    -fx-font-size: 20px;
+}

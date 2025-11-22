@@ -39,4 +39,20 @@ public class Main extends Application {
         primaryStage.setScene(scene1);
         currentScene = scene1;
     }
+
+    public static void setScene1() {
+        if (currentScene.equals(scene1)) {
+            return;
+        }
+        primaryStage.setScene(scene1);
+        currentScene = scene1;
+    }
+
+    public static void setScene2() {
+        if (currentScene.equals(scene2)) {
+            return;
+        }
+        primaryStage.setScene(scene2);
+        currentScene = scene2;
+    }
 }
