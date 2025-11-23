@@ -95,4 +95,11 @@ public class DrawingVisualization {
     public void setShowCircles(boolean showCircles) {
         v.setShowCircles(showCircles);
     }
+
+    public void clear() {
+        pane.getChildren().clear();
+        v = new Visualization(pane);
+        drawingVisual = new Polyline();
+        pane.getChildren().addAll(drawingVisual);
+    }
 }

@@ -76,7 +76,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Label>
-            <Slider fx:id="drawingSpeedSlider" majorTickUnit="0.25" max="1.0" min="1.0E-4" onDragDone="#handleDrawingSpeedChange" showTickLabels="true" showTickMarks="true" value="0.502">
+            <Slider fx:id="drawingSpeedSlider" blockIncrement="0.1" majorTickUnit="0.225" max="1.0" min="0.1" onMouseReleased="#handleDrawingSpeedChanged" showTickMarks="true" value="0.55">
                <padding>
                   <Insets left="6.0" right="6.0" />
                </padding>
@@ -101,7 +101,7 @@
             </Label>
             <VBox alignment="CENTER_LEFT" prefHeight="92.0" prefWidth="200.0" spacing="5.0">
                <children>
-                  <RadioButton fx:id="strokeSizeSmall" mnemonicParsing="false" onAction="#handleStrokeSize" text="Small">
+                  <RadioButton fx:id="strokeSizeSmall" mnemonicParsing="false" onAction="#handleStrokeSizeChanged" text="Small">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -109,12 +109,12 @@
                         <ToggleGroup fx:id="strokeSizeGroup" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="strokeSizeMedium" mnemonicParsing="false" onAction="#handleStrokeSize" selected="true" text="Medium" toggleGroup="$strokeSizeGroup">
+                  <RadioButton fx:id="strokeSizeMedium" mnemonicParsing="false" onAction="#handleStrokeSizeChanged" selected="true" text="Medium" toggleGroup="$strokeSizeGroup">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton fx:id="strokeSizeLarge" mnemonicParsing="false" onAction="#handleStrokeSize" text="Large" toggleGroup="$strokeSizeGroup">
+                  <RadioButton fx:id="strokeSizeLarge" mnemonicParsing="false" onAction="#handleStrokeSizeChanged" text="Large" toggleGroup="$strokeSizeGroup">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -147,7 +147,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Label>
-            <ColorPicker fx:id="colorSelector" onAction="#handleColorChange" prefHeight="38.0" prefWidth="177.0" promptText="Color">
+            <ColorPicker fx:id="colorSelector" onAction="#handleColorChanged" prefHeight="38.0" prefWidth="177.0" promptText="Color">
                <value>
                   <Color />
                </value>

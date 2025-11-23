@@ -8,6 +8,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -32,15 +33,30 @@ public class PrimaryController {
     @FXML private ToggleButton hideEpicyclesToggleButton;
     @FXML private ColorPicker colorSelector;
 
-    DrawingVisualization dv = new DrawingVisualization(mainPane);
+    private DrawingVisualization dv;
 
     @FXML
     public void initialize() {
-        handleDrawingSpeed();
+        dv = new DrawingVisualization(mainPane);
+        handleEpicyclesToggled();
+        handleDrawingSpeedChanged();
 
         playButton.setDisable(true);
         pauseButton.setDisable(true);
         resetButton.setDisable(true);
+
+        mainPane.addEventHandler(MouseEvent.MOUSE_DRAGGED, eh -> {
+            playButton.setDisable(false);
+            pauseButton.setDisable(false);
+            resetButton.setDisable(false);
+        });
+
+        resetButton.setOnAction(eh -> {
+            resetButton.setDisable(true);
+            playButton.setDisable(true);
+            pauseButton.setDisable(true);
+            dv.clear();
+        });
     }
 
     @FXML
@@ -60,7 +76,7 @@ public class PrimaryController {
     }
 
     @FXML
-    public void handleStrokeSize() {
+    public void handleStrokeSizeChanged() {
         String size = strokeSizeGroup.getSelectedToggle().toString();
         switch (size) {
             case "Small":
@@ -76,13 +92,13 @@ public class PrimaryController {
     }
 
     @FXML 
-    public void handleDrawingSpeed() {
+    public void handleDrawingSpeedChanged() {
         double speed = drawingSpeedSlider.getValue();
         dv.setMultiplier(speed);
     }
 
     @FXML 
-    public void handlePointDensity() {
+    public void handlePointDensityChanged() {
         double density = pointDensitySlider.getValue();
         //set point density
     }
@@ -94,7 +110,7 @@ public class PrimaryController {
     }
 
     @FXML 
-    public void handleColorChange() {
+    public void handleColorChanged() {
         Color color = colorSelector.getValue();
         //set color
     }
