@@ -49,12 +49,14 @@ public class PrimaryController {
             playButton.setDisable(false);
             pauseButton.setDisable(false);
             resetButton.setDisable(false);
+            drawingSpeedSlider.setDisable(true);
         });
 
         resetButton.setOnAction(eh -> {
             resetButton.setDisable(true);
             playButton.setDisable(true);
             pauseButton.setDisable(true);
+            drawingSpeedSlider.setDisable(false);
             dv.clear();
         });
     }
