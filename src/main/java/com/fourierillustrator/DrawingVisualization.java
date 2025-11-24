@@ -94,7 +94,6 @@ public class DrawingVisualization {
     }
 
     public void setShowCircles(boolean showCircles) {
-        v.setShowCircles(showCircles);
         for (Epicycle e : v.getEpicycles()) {
             e.toggleCircles(showCircles);
         }

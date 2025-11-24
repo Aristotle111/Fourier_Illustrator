@@ -50,14 +50,14 @@ public class Visualization {
     public void setEpicycles(Epicycle[] epicycles) {
         if (this.epicycles != null) {
             for (Epicycle e : this.epicycles) {
-                pane.getChildren().remove(e.arrowShaft);
-                pane.getChildren().remove(e.circle);
+                pane.getChildren().remove(e.getArrowShaft());
+                pane.getChildren().remove(e.getCircle());
             }
         }
         this.epicycles = new LinkedList<Epicycle>(Arrays.asList(epicycles));
         
         for (Epicycle e : epicycles) {
-            pane.getChildren().addAll(e.arrowShaft, e.circle);
+            pane.getChildren().addAll(e.getArrowShaft(), e.getCircle());
         }
     }
 
@@ -72,10 +72,10 @@ public class Visualization {
     }
 
     public void updateEpicycles(double seconds) {
-        epicycles.get(0).update(seconds, centerX, centerY, showCircles);
+        epicycles.get(0).update(seconds, centerX, centerY);
         
         for (int i = 1; i < epicycles.size(); i++) {     
-            epicycles.get(i).update(seconds, epicycles.get(i - 1).endX, epicycles.get(i - 1).endY, showCircles);
+            epicycles.get(i).update(seconds, epicycles.get(i - 1).getEndX(), epicycles.get(i - 1).getEndY());
         }
         System.out.println();
         if ((seconds % period) + animation.DELTA_T / 1_000_000_000.0 >= period) pl.getPoints().clear();
@@ -114,7 +114,7 @@ public class Visualization {
             updateEpicycles(seconds);
             
             pl.getPoints().addAll(new Double[]{
-            epicycles.get(epicycles.size() - 1).endX, epicycles.get(epicycles.size() - 1).endY  // New Point 4 (x, y)
+            epicycles.get(epicycles.size() - 1).getEndX(), epicycles.get(epicycles.size() - 1).getEndY()  // New Point 4 (x, y)
             });
                 
         }
@@ -141,7 +141,3 @@ public class Visualization {
         return epicycles;
     }
 }
-
-
-
-

@@ -5,15 +5,15 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 
 public class Epicycle {
-    double startX;
-    double endX;
-    double startY;
-    double endY;
-    double radius;
-    double omega;
-    Line arrowShaft;
-    Circle circle;
-    double phase;
+    private double startX;
+    private double endX;
+    private double startY;
+    private double endY;
+    private double radius;
+    private double omega;
+    private Line arrowShaft;
+    private Circle circle;
+    private double phase;
         
     public Epicycle(double radius, double omega) {
         this.radius = radius;
@@ -34,26 +34,8 @@ public class Epicycle {
         circle = new Circle(radius);
         circle.setFill(null); circle.setStroke(Color.BLACK);
     }
-        
-    void update(double seconds, double newStartX, double newStartY, boolean showCircles) {
-        startX = newStartX;
-        startY = newStartY;
-        endX = radius * Math.cos(omega * seconds + phase) + startX;
-        endY = radius * Math.sin(omega * seconds + phase) + startY;
 
-        if (!showCircles) circle.setStroke(null);
-        else circle.setStroke(Color.BLACK);
-        
-        arrowShaft.setStartX(startX);
-        arrowShaft.setStartY(startY);
-        arrowShaft.setEndX(endX);
-        arrowShaft.setEndY(endY);
-
-        circle.setCenterX(newStartX);
-        circle.setCenterY(newStartY);
-    }
-
-    void update(double seconds, double newStartX, double newStartY) {
+    public void update(double seconds, double newStartX, double newStartY) {
         startX = newStartX;
         startY = newStartY;
         endX = radius * Math.cos(omega * seconds + phase) + startX;
@@ -75,5 +57,21 @@ public class Epicycle {
     public void toggleCircles(boolean showCircles) {
         if (!showCircles) circle.setStroke(null);
         else circle.setStroke(Color.BLACK);
+    }
+
+    public double getEndX() {
+        return endX;
+    }
+
+    public double getEndY() {
+        return endY;
+    }
+
+    public Line getArrowShaft() {
+        return arrowShaft;
+    }
+
+    public Circle getCircle() {
+        return circle;
     }
 }
