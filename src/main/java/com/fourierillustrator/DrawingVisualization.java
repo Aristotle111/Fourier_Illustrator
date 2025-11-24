@@ -28,7 +28,8 @@ public class DrawingVisualization {
 
 
     private class DrawingLogic extends AnimationTimer {
-        final double DELTA_T = 10000; //nanoseconds, sample frequency = 1000000000/delta_t 
+        //final 
+        double DELTA_T = 10000; //nanoseconds, sample frequency = 1000000000/delta_t 
         long lastUpdate = 0;
         long startTime;
         double startX;
@@ -101,5 +102,9 @@ public class DrawingVisualization {
         v = new Visualization(pane);
         drawingVisual = new Polyline();
         pane.getChildren().addAll(drawingVisual);
+    }
+
+    public void setDT(double DELTA_T) {
+        dl.DELTA_T = DELTA_T;
     }
 }

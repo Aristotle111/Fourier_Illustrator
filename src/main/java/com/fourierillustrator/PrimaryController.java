@@ -52,6 +52,8 @@ public class PrimaryController {
             pauseButton.setDisable(false);
             resetButton.setDisable(false);
             drawingSpeedSlider.setDisable(true);
+            pointDensitySlider.setDisable(true);
+            handlePointDensityChanged();
         });
 
         resetButton.setOnAction(eh -> {
@@ -59,6 +61,7 @@ public class PrimaryController {
             playButton.setDisable(true);
             pauseButton.setDisable(true);
             drawingSpeedSlider.setDisable(false);
+            pointDensitySlider.setDisable(false);
             dv.clear();
         });
     }
@@ -115,7 +118,7 @@ public class PrimaryController {
     @FXML 
     public void handlePointDensityChanged() {
         double density = pointDensitySlider.getValue();
-        //set point density
+        dv.setDT(200000000 - (density * 1.5));
     }
 
     @FXML 
