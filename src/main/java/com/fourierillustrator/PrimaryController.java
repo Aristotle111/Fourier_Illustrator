@@ -50,7 +50,7 @@ public class PrimaryController {
         resetButton.setDisable(true);
 
         mainPane.addEventHandler(MouseEvent.MOUSE_DRAGGED, eh -> {
-            playButton.setDisable(false);
+            playButton.setDisable(true);
             pauseButton.setDisable(false);
             resetButton.setDisable(false);
             drawingSpeedSlider.setDisable(true);
@@ -68,6 +68,18 @@ public class PrimaryController {
             dv.clear();
             handlePointDensityChanged();
             handleDrawingSpeedChanged();
+        });
+
+        playButton.setOnAction(eh -> {
+            dv.v.start();
+            playButton.setDisable(true);
+            pauseButton.setDisable(false);
+        });
+
+        pauseButton.setOnAction(eh -> {
+            dv.v.pause();
+            pauseButton.setDisable(true);
+            playButton.setDisable(false);
         });
     }
 
