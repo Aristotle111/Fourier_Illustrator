@@ -31,7 +31,8 @@ public class Visualization {
         animation = new VisualLogic();
         
         pl = new Polyline();
-        pl.setStroke(Color.RED);
+        pl.setStroke(Color.BLACK);
+        pl.setStrokeWidth(4);
         pane.getChildren().addAll(pl);
     }
 
@@ -41,7 +42,8 @@ public class Visualization {
         animation = new VisualLogic();
         
         pl = new Polyline();
-        pl.setStroke(Color.RED);
+        pl.setStroke(Color.BLACK);
+        pl.setStrokeWidth(4);
         pane.getChildren().add(pl);
     }
 

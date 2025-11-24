@@ -6,6 +6,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
@@ -34,6 +35,7 @@ public class PrimaryController {
     @FXML private ColorPicker colorSelector;
 
     private DrawingVisualization dv;
+    
 
     @FXML
     public void initialize() {
@@ -68,27 +70,38 @@ public class PrimaryController {
 
     @FXML
     public void handleStrokeToggle() {
-        
+        if (showStrokeToggle.isSelected()) {
+            dv.drawingVisual.setOpacity(0);
+            showStrokeToggle.setText("Show Original Stroke");
+            return;
+        }
+        dv.drawingVisual.setOpacity(1);
+        showStrokeToggle.setText("Hide Original Stroke");
     }
 
     @FXML
     public void handleEpicyclesToggled() {
-        boolean hide = hideEpicyclesToggleButton.isSelected();
-        dv.setShowCircles(!hide);
+        if (hideEpicyclesToggleButton.isSelected()) {
+            dv.setShowCircles(false);
+            hideEpicyclesToggleButton.setText("Show Epicycles");
+            return;
+        }
+        dv.setShowCircles(true);
+        hideEpicyclesToggleButton.setText("Hide Epicycles");
     }
 
     @FXML
     public void handleStrokeSizeChanged() {
-        String size = strokeSizeGroup.getSelectedToggle().toString();
+        String size = ((ToggleButton) strokeSizeGroup.getSelectedToggle()).getText();
         switch (size) {
             case "Small":
-                //set stroke size to small
+                dv.v.pl.setStrokeWidth(2);
                 break;
             case "Medium":
-                //set stroke size to medium
+                dv.v.pl.setStrokeWidth(4);
                 break;
             case "Large":
-                //set stroke size to large
+                dv.v.pl.setStrokeWidth(7);
                 break;
         }
     }
@@ -108,12 +121,12 @@ public class PrimaryController {
     @FXML 
     public void handleOpacityChanged() {
         double opacity = opacitySlider.getValue();
-        //set opacity
+        dv.v.pl.setOpacity(opacity);
     }
 
     @FXML 
     public void handleColorChanged() {
         Color color = colorSelector.getValue();
-        //set color
+        dv.v.pl.setStroke(color);
     }
 }
