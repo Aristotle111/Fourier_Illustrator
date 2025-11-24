@@ -136,6 +136,10 @@ public class Visualization {
     public void setMultiplier(double multiplier) {
         this.multiplier = multiplier;
     }
+
+    public LinkedList<Epicycle> getEpicycles() {
+        return epicycles;
+    }
 }
 
 

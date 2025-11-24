@@ -71,4 +71,9 @@ public class Epicycle {
     public double getRadius() {
         return radius;
     }
+
+    public void toggleCircles(boolean showCircles) {
+        if (!showCircles) circle.setStroke(null);
+        else circle.setStroke(Color.BLACK);
+    }
 }
