@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.control.Label;
 
 public class PrimaryController {
 
@@ -33,6 +34,7 @@ public class PrimaryController {
     @FXML private Slider opacitySlider;
     @FXML private ToggleButton hideEpicyclesToggleButton;
     @FXML private ColorPicker colorSelector;
+    @FXML private Label epicycleCount;
 
     private DrawingVisualization dv;
     
@@ -53,7 +55,7 @@ public class PrimaryController {
             resetButton.setDisable(false);
             drawingSpeedSlider.setDisable(true);
             pointDensitySlider.setDisable(true);
-            handlePointDensityChanged();
+            epicycleCount.setText(String.valueOf(dv.drawingVisual.getPoints().size()));
         });
 
         resetButton.setOnAction(eh -> {
@@ -62,7 +64,10 @@ public class PrimaryController {
             pauseButton.setDisable(true);
             drawingSpeedSlider.setDisable(false);
             pointDensitySlider.setDisable(false);
+            epicycleCount.setText("NONE");
             dv.clear();
+            handlePointDensityChanged();
+            handleDrawingSpeedChanged();
         });
     }
 

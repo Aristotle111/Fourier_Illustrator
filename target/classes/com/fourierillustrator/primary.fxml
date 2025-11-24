@@ -39,6 +39,20 @@
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Separator prefHeight="40.0" prefWidth="200.0" />
+            <Label text="Current # of Epicycles:" underline="true">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding>
+            </Label>
+            <Label fx:id="epicycleCount" text="NONE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Separator prefHeight="40.0" prefWidth="200.0" />
             <ToggleButton fx:id="hideEpicyclesToggleButton" mnemonicParsing="false" onAction="#handleEpicyclesToggled" prefHeight="35.0" prefWidth="173.0" text="Hide Epicycles">
                <font>
                   <Font size="20.0" />
@@ -163,7 +177,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Slider fx:id="pointDensitySlider" majorTickUnit="2.5E7" max="2.0E8" minorTickCount="0" onMouseReleased="#handlePointDensityChanged" prefHeight="25.0" prefWidth="1496.0" showTickMarks="true" snapToTicks="true" value="1.5E8">
+            <Slider fx:id="pointDensitySlider" majorTickUnit="2.5E7" max="2.0E8" min="0.1" minorTickCount="0" onMouseReleased="#handlePointDensityChanged" prefHeight="25.0" prefWidth="1496.0" showTickMarks="true" snapToTicks="true" value="1.5E8">
                <padding>
                   <Insets left="200.0" right="200.0" />
                </padding>
