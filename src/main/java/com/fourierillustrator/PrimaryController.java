@@ -4,16 +4,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.control.Label;
 
 public class PrimaryController {
 
@@ -55,7 +54,7 @@ public class PrimaryController {
             resetButton.setDisable(false);
             drawingSpeedSlider.setDisable(true);
             pointDensitySlider.setDisable(true);
-            epicycleCount.setText(String.valueOf(dv.drawingVisual.getPoints().size()));
+            epicycleCount.setText(String.valueOf((dv.drawingVisual.getPoints().size())/2));
         });
 
         resetButton.setOnAction(eh -> {
@@ -118,10 +117,10 @@ public class PrimaryController {
                 dv.v.pl.setStrokeWidth(2);
                 break;
             case "Medium":
-                dv.v.pl.setStrokeWidth(4);
+                dv.v.pl.setStrokeWidth(5);
                 break;
             case "Large":
-                dv.v.pl.setStrokeWidth(7);
+                dv.v.pl.setStrokeWidth(10);
                 break;
         }
     }

@@ -32,7 +32,7 @@ public class Visualization {
         
         pl = new Polyline();
         pl.setStroke(Color.BLACK);
-        pl.setStrokeWidth(4);
+        pl.setStrokeWidth(5);
         pane.getChildren().addAll(pl);
     }
 
