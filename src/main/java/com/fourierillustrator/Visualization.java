@@ -77,7 +77,6 @@ public class Visualization {
         for (int i = 1; i < epicycles.size(); i++) {     
             epicycles.get(i).update(seconds, epicycles.get(i - 1).getEndX(), epicycles.get(i - 1).getEndY());
         }
-        System.out.println();
         if ((seconds % period) + animation.DELTA_T / 1_000_000_000.0 >= period) pl.getPoints().clear();
     }
 

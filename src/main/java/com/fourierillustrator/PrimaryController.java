@@ -85,6 +85,15 @@ public class PrimaryController {
     @FXML
     public void switchScene() {
         Main.switchScenes();
+        resetButton.setDisable(true);
+        playButton.setDisable(true);
+        pauseButton.setDisable(true);
+        drawingSpeedSlider.setDisable(false);
+        pointDensitySlider.setDisable(false);
+        epicycleCount.setText("NONE");
+        dv.clear();
+        handlePointDensityChanged();
+        handleDrawingSpeedChanged();
     }
 
     @FXML
