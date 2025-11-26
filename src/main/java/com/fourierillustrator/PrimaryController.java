@@ -120,7 +120,7 @@ public class PrimaryController {
 
     @FXML
     public void handleStrokeSizeChanged() {
-        String size = ((ToggleButton) strokeSizeGroup.getSelectedToggle()).getText();
+        String size = ((RadioButton) strokeSizeGroup.getSelectedToggle()).getText();
         switch (size) {
             case "Small":
                 dv.v.pl.setStrokeWidth(2);

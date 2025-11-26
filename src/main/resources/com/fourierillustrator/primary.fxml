@@ -15,7 +15,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1500.0" style="-fx-border-color: black; -fx-border-style: solid; -fx-border-width: 2px;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fourierillustrator.PrimaryController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1500.0" style="-fx-border-color: black; -fx-border-style: solid; -fx-border-width: 2px;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fourierillustrator.PrimaryController">
    <top>
       <VBox fx:id="sceneSelectorBox1" alignment="CENTER" prefHeight="90.0" BorderPane.alignment="CENTER">
          <children>
@@ -39,7 +39,7 @@
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Separator prefHeight="40.0" prefWidth="200.0" />
-            <Label text="Current # of Epicycles:" underline="true">
+            <Label text="Number of Epicycles:" underline="true">
                <font>
                   <Font size="18.0" />
                </font>
@@ -53,7 +53,7 @@
                </font>
             </Label>
             <Separator prefHeight="40.0" prefWidth="200.0" />
-            <ToggleButton fx:id="hideEpicyclesToggleButton" mnemonicParsing="false" onAction="#handleEpicyclesToggled" prefHeight="35.0" prefWidth="173.0" text="Hide Epicycles">
+            <ToggleButton fx:id="hideEpicyclesToggleButton" mnemonicParsing="false" onAction="#handleEpicyclesToggled" prefHeight="15.0" prefWidth="173.0" text="Hide Epicycles">
                <font>
                   <Font size="20.0" />
                </font>
@@ -139,7 +139,7 @@
                </padding>
             </VBox>
             <Separator prefHeight="40.0" prefWidth="200.0" />
-            <Label text="Opacity:" underline="true">
+            <Label text="Stroke Opacity:" underline="true">
                <font>
                   <Font size="19.0" />
                </font>
@@ -153,7 +153,7 @@
                </padding>
             </Slider>
             <Separator prefHeight="40.0" prefWidth="200.0" />
-            <Label text="Color:" underline="true">
+            <Label text="Stroke Color:" underline="true">
                <font>
                   <Font size="19.0" />
                </font>
@@ -161,7 +161,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </Label>
-            <ColorPicker fx:id="colorSelector" onAction="#handleColorChanged" prefHeight="38.0" prefWidth="177.0" promptText="Color">
+            <ColorPicker fx:id="colorSelector" onAction="#handleColorChanged" prefHeight="41.0" prefWidth="177.0" promptText="Color">
                <value>
                   <Color />
                </value>
