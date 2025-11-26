@@ -1,5 +1,6 @@
 package com.fourierillustrator;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -47,6 +48,17 @@ public class Visualization {
         pane.getChildren().add(pl);
     }
 
+    public Visualization(Pane pane, ArrayList<Epicycle> epicycles) {
+        this.pane = pane;
+        setEpicycles(epicycles);
+        animation = new VisualLogic();
+        
+        pl = new Polyline();
+        pl.setStroke(Color.BLACK);
+        pl.setStrokeWidth(4);
+        pane.getChildren().add(pl);
+    }
+
     public void setEpicycles(Epicycle[] epicycles) {
         if (this.epicycles != null) {
             for (Epicycle e : this.epicycles) {
@@ -55,6 +67,20 @@ public class Visualization {
             }
         }
         this.epicycles = new LinkedList<Epicycle>(Arrays.asList(epicycles));
+        
+        for (Epicycle e : epicycles) {
+            pane.getChildren().addAll(e.getArrowShaft(), e.getCircle());
+        }
+    }
+
+    public void setEpicycles(ArrayList<Epicycle> epicycles) {
+        if (this.epicycles != null) {
+            for (Epicycle e : this.epicycles) {
+                pane.getChildren().remove(e.getArrowShaft());
+                pane.getChildren().remove(e.getCircle());
+            }
+        }
+        this.epicycles = new LinkedList<Epicycle>(epicycles);
         
         for (Epicycle e : epicycles) {
             pane.getChildren().addAll(e.getArrowShaft(), e.getCircle());
@@ -72,6 +98,8 @@ public class Visualization {
     }
 
     public void updateEpicycles(double seconds) {
+        if (epicycles.isEmpty()) return;
+        
         epicycles.get(0).update(seconds, centerX, centerY);
         
         for (int i = 1; i < epicycles.size(); i++) {     
