@@ -115,7 +115,7 @@ public class Visualization {
     }
 
     private class VisualLogic extends AnimationTimer {
-        final double DELTA_T = 1000; //nanoseconds, sample frequency = 1000000000/delta_t 
+        final double DELTA_T = 100000000; //nanoseconds, sample frequency = 1000000000/delta_t 
         long lastUpdate = 0;
         long startTime = -1;
         long currentTime;
@@ -147,6 +147,13 @@ public class Visualization {
         }
     }
 
+    public void reset() {
+        updateEpicycles(0);
+        pl.getPoints().clear();
+        animation.stop();
+        animation.startTime = -1;
+    }
+
     public void setShowCircles(Boolean showCircles) {
         this.showCircles = showCircles;
     }
@@ -166,10 +173,5 @@ public class Visualization {
 
     public LinkedList<Epicycle> getEpicycles() {
         return epicycles;
-    }
-
-    public double getLastUpdate() {
-        return animation.lastUpdate / 1_000_000_000.0;
-        //FIX THIS
     }
 }

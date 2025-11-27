@@ -38,6 +38,7 @@
             <Button fx:id="addTabButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleNewTab" text="Add New Tab" />
             <Separator prefHeight="40.0" prefWidth="200.0" />
             <Button fx:id="addEpicycleButton" mnemonicParsing="false" onAction="#handleNewEpicycle" text="Add Epicycle" />
+            <Button fx:id="removeEpicycleButton" disable="true" mnemonicParsing="false" onAction="#handleRemoveEpicycle" text="Remove Epicycle" />
             <Separator prefHeight="40.0" prefWidth="200.0" />
             <ComboBox fx:id="menuBox" prefWidth="150.0" />
             <VBox alignment="CENTER" spacing="10.0">
@@ -49,13 +50,14 @@
                </padding>
                <children>
                   <Label text="Frequency (Hz)" />
-                  <Slider fx:id="frequencySlider" blockIncrement="1.0" majorTickUnit="1.0" max="5.0" minorTickCount="0" onMouseReleased="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" value="1.0" />
+                  <Slider fx:id="frequencySlider" blockIncrement="1.0" majorTickUnit="1.0" max="5.0" minorTickCount="0" onMouseReleased="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" />
                   <Label text="Amplitude (radius)" />
-                  <Slider fx:id="amplitudeSlider" majorTickUnit="10.0" min="10.0" minorTickCount="0" onMouseReleased="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" />
+                  <Slider fx:id="amplitudeSlider" majorTickUnit="10.0" min="10.0" minorTickCount="0" onMouseReleased="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
                   <Label text="Phase Offset (radians)" />
-                  <Slider fx:id="phaseSlider" blockIncrement="0.25" majorTickUnit="0.25" max="2.0" minorTickCount="0" onMouseReleased="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" />
+                  <Slider fx:id="phaseSlider" blockIncrement="0.25" majorTickUnit="0.25" max="2.0" minorTickCount="0" onMouseReleased="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
                   <Button fx:id="playButton" mnemonicParsing="false" text="Play" />
-                  <Button fx:id="pauseButton" mnemonicParsing="false" text="Pause" />
+                  <Button fx:id="pauseButton" disable="true" mnemonicParsing="false" text="Pause" />
+                  <Button fx:id="resetButton" disable="true" mnemonicParsing="false" text="Reset" />
                </children>
             </VBox>
          </children></VBox>
@@ -127,6 +129,6 @@
       <VBox prefHeight="60.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
    </bottom>
    <center>
-      <TabPane fx:id="epicycleTabPane" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black;" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER" />
+      <TabPane fx:id="epicycleTabPane" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-background-color: white;" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

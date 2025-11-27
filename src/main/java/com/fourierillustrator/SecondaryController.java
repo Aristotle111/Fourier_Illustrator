@@ -42,6 +42,8 @@ public class SecondaryController {
     @FXML private Slider phaseSlider;
     @FXML private Button playButton;
     @FXML private Button pauseButton;
+    @FXML private Button resetButton;
+    @FXML private Button removeEpicycleButton;
 
     private ArrayList<SceneTab> sceneTabs;
     private HashMap<Tab, SceneTab> tabMap;
@@ -63,22 +65,39 @@ public class SecondaryController {
 
                 frequencySlider.setValue(epicycle.getFrequency());
                 amplitudeSlider.setValue(epicycle.getRadius());
-                phaseSlider.setValue(epicycle.getPhase());
+                phaseSlider.setValue(epicycle.getPhaseCoefficient());
             }
         });
 
         playButton.setOnAction(eh -> {
-            getCurrentSceneTab().getVisualization().start();
+            getCurrentSceneTab().play();
             playButton.setDisable(true);
             pauseButton.setDisable(false);
+            resetButton.setDisable(false);
+
+            frequencySlider.setDisable(true);
+            amplitudeSlider.setDisable(true);
+            phaseSlider.setDisable(true);
         });
 
         pauseButton.setOnAction(eh -> {
             getCurrentSceneTab().getVisualization().pause();
             pauseButton.setDisable(true);
             playButton.setDisable(false);
-            lastUpdate = getCurrentSceneTab().getVisualization().getLastUpdate();
-            //FIX THIS, ISSUE WITH MAKING CHANGES WHILE PAUSED
+        });
+
+        resetButton.setOnAction(eh -> {
+            resetButton.setDisable(true);
+            playButton.setDisable(false);
+            pauseButton.setDisable(true);
+            frequencySlider.setDisable(false);
+            amplitudeSlider.setDisable(false);
+            phaseSlider.setDisable(false);
+            getCurrentSceneTab().getVisualization().reset();
+
+            frequencySlider.setDisable(false);
+            amplitudeSlider.setDisable(false);
+            phaseSlider.setDisable(false);
         });
     }
 
@@ -130,12 +149,24 @@ public class SecondaryController {
         if (selectedTab != null) {
             SceneTab sceneTab = tabMap.get(selectedTab);
             sceneTab.addEpicycle();
+            removeEpicycleButton.setDisable(false);
+        }
+    }
+
+    @FXML
+    public void handleRemoveEpicycle() {
+        Tab selectedTab = epicycleTabPane.getSelectionModel().getSelectedItem();
+        if (selectedTab != null) {
+            SceneTab sceneTab = tabMap.get(selectedTab);
+            sceneTab.removeEpicycle();
+            if (sceneTab.getEpicycles().isEmpty()) removeEpicycleButton.setDisable(true);
         }
     }
 
     @FXML
     public void handleEpicycleUpdate() {
-        
+        if (getCurrentSceneTab().getEpicycles().isEmpty()) return;
+
         Epicycle currentEpicycle = getCurrentSceneTab().getEpicycles().get(menuBox.getSelectionModel().getSelectedIndex());
         currentEpicycle.changeParams(frequencySlider.getValue(), amplitudeSlider.getValue(), phaseSlider.getValue()); 
         getCurrentSceneTab().getVisualization().updateEpicycles(lastUpdate);  
@@ -162,6 +193,7 @@ public class SecondaryController {
 
             tab.setOnClosed(_ -> {
                 sceneTabs.remove(this);
+                if (sceneTabs.isEmpty()) menuBox.getItems().clear();
             });
 
             tab.setOnSelectionChanged(_ -> updateMenu(menuBox));
@@ -174,14 +206,37 @@ public class SecondaryController {
             visualization.updateEpicycles(lastUpdate);
         }
 
+        public void removeEpicycle() {
+            System.out.println(menuBox.getSelectionModel().getSelectedIndex());
+            epicycles.remove(menuBox.getSelectionModel().getSelectedIndex());
+            updateMenu(menuBox);
+            visualization.setEpicycles(epicycles);
+            visualization.updateEpicycles(lastUpdate);
+        }
+
         public void updateMenu(ComboBox<String> comboBox) {
             comboBox.getItems().clear();
             for (int i = 0; i < epicycles.size(); i++) {
                 comboBox.getItems().add("Epicycle " + (i + 1));
             }
 
-            if (epicycles.isEmpty()) return;
+            if (epicycles.isEmpty()) {
+                comboBox.setDisable(true);
+                removeEpicycleButton.setDisable(true);
+                playButton.setDisable(true);
+                frequencySlider.setDisable(true);
+                amplitudeSlider.setDisable(true);
+                phaseSlider.setDisable(true);
+                return;
+            }
+
+            removeEpicycleButton.setDisable(false);
+            comboBox.setDisable(false);
             comboBox.getSelectionModel().select("Epicycle " + (epicycles.size()));
+            playButton.setDisable(false);
+            frequencySlider.setDisable(false);
+            amplitudeSlider.setDisable(false);
+            phaseSlider.setDisable(false);
         }
 
         public Visualization getVisualization() {

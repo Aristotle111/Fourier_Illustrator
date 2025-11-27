@@ -51,10 +51,10 @@ public class Epicycle {
         circle.setCenterY(newStartY);
     }
 
-    public void changeParams(double frequency, double amplitude, double phase) {
+    public void changeParams(double frequency, double amplitude, double phaseCoefficient) {
         omega = frequency * 2 * Math.PI;
         radius = amplitude;
-        this.phase = phase * Math.PI;
+        phase = phaseCoefficient * Math.PI;
 
         Pane pane = (Pane) circle.getParent();
         pane.getChildren().remove(circle);
@@ -94,5 +94,9 @@ public class Epicycle {
 
     public double getPhase() {
         return phase;
+    }
+
+    public double getPhaseCoefficient() {
+        return phase / Math.PI;
     }
 }
