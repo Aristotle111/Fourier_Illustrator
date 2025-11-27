@@ -167,4 +167,9 @@ public class Visualization {
     public LinkedList<Epicycle> getEpicycles() {
         return epicycles;
     }
+
+    public double getLastUpdate() {
+        return animation.lastUpdate / 1_000_000_000.0;
+        //FIX THIS
+    }
 }

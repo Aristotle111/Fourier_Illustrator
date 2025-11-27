@@ -1,5 +1,6 @@
 package com.fourierillustrator;
 
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -50,13 +51,25 @@ public class Epicycle {
         circle.setCenterY(newStartY);
     }
 
-    public double getRadius() {
-        return radius;
+    public void changeParams(double frequency, double amplitude, double phase) {
+        omega = frequency * 2 * Math.PI;
+        radius = amplitude;
+        this.phase = phase * Math.PI;
+
+        Pane pane = (Pane) circle.getParent();
+        pane.getChildren().remove(circle);
+        circle = new Circle(radius);
+        circle.setFill(null); circle.setStroke(Color.BLACK);
+        pane.getChildren().add(circle);
     }
 
     public void toggleCircles(boolean showCircles) {
         if (!showCircles) circle.setStroke(null);
         else circle.setStroke(Color.BLACK);
+    }
+
+    public double getRadius() {
+        return radius;
     }
 
     public double getEndX() {
@@ -73,5 +86,13 @@ public class Epicycle {
 
     public Circle getCircle() {
         return circle;
+    }
+
+    public double getFrequency() {
+        return omega / (2 * Math.PI);
+    }
+
+    public double getPhase() {
+        return phase;
     }
 }

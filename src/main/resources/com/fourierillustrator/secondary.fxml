@@ -8,15 +8,13 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Slider?>
-<?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1500.0" style="-fx-border-color: black; -fx-border-style: solid; -fx-border-width: 2px;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fourierillustrator.SecondaryController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1500.0" style="-fx-border-color: black; -fx-border-style: solid; -fx-border-width: 2px;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fourierillustrator.SecondaryController">
    <top>
       <VBox fx:id="sceneSelectorBox2" alignment="CENTER" prefHeight="90.0" BorderPane.alignment="CENTER">
          <children>
@@ -34,7 +32,7 @@
       </VBox>
    </top>
    <right>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
             <Separator prefHeight="40.0" prefWidth="200.0" />
             <Button fx:id="addTabButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleNewTab" text="Add New Tab" />
@@ -42,9 +40,24 @@
             <Button fx:id="addEpicycleButton" mnemonicParsing="false" onAction="#handleNewEpicycle" text="Add Epicycle" />
             <Separator prefHeight="40.0" prefWidth="200.0" />
             <ComboBox fx:id="menuBox" prefWidth="150.0" />
-            <Slider />
-            <Slider />
-            <Slider />
+            <VBox alignment="CENTER" spacing="10.0">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets top="30.0" />
+               </padding>
+               <children>
+                  <Label text="Frequency (Hz)" />
+                  <Slider fx:id="frequencySlider" blockIncrement="1.0" majorTickUnit="1.0" max="5.0" minorTickCount="0" onMouseReleased="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" value="1.0" />
+                  <Label text="Amplitude (radius)" />
+                  <Slider fx:id="amplitudeSlider" majorTickUnit="10.0" min="10.0" minorTickCount="0" onMouseReleased="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" />
+                  <Label text="Phase Offset (radians)" />
+                  <Slider fx:id="phaseSlider" blockIncrement="0.25" majorTickUnit="0.25" max="2.0" minorTickCount="0" onMouseReleased="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" />
+                  <Button fx:id="playButton" mnemonicParsing="false" text="Play" />
+                  <Button fx:id="pauseButton" mnemonicParsing="false" text="Pause" />
+               </children>
+            </VBox>
          </children></VBox>
    </right>
    <left>
@@ -114,14 +127,6 @@
       <VBox prefHeight="60.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
    </bottom>
    <center>
-      <TabPane fx:id="epicycleTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER">
-        <tabs>
-          <Tab text="Epicycles 1">
-               <content>
-                  <Pane />
-               </content>
-          </Tab>
-        </tabs>
-      </TabPane>
+      <TabPane fx:id="epicycleTabPane" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black;" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>
