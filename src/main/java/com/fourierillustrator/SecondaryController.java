@@ -13,9 +13,11 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 
 public class SecondaryController {
@@ -41,6 +43,9 @@ public class SecondaryController {
     @FXML private Button pauseButton;
     @FXML private Button resetButton;
     @FXML private Button removeEpicycleButton;
+    @FXML private Tooltip frequencyTooltip;
+    @FXML private Tooltip amplitudeTooltip;
+    @FXML private Tooltip phaseTooltip;
 
     private ArrayList<SceneTab> sceneTabs;
     private HashMap<Tab, SceneTab> tabMap;
@@ -51,6 +56,9 @@ public class SecondaryController {
         sceneTabs = new ArrayList<>();
         tabMap = new HashMap<>();
         handleNewTab();
+        frequencyTooltip.setShowDelay(Duration.millis(100));
+        amplitudeTooltip.setShowDelay(Duration.millis(100));
+        phaseTooltip.setShowDelay(Duration.millis(100));
 
         menuBox.getSelectionModel().selectedIndexProperty().addListener((_, _, newValue) -> {
             if (menuBox.getItems().size() == 0) return;

@@ -10,7 +10,9 @@
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -35,29 +37,64 @@
       <VBox alignment="CENTER" BorderPane.alignment="CENTER">
          <children>
             <Separator prefHeight="40.0" prefWidth="200.0" />
-            <Button fx:id="addTabButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleNewTab" text="Add New Tab" />
+            <Button fx:id="addEpicycleButton" mnemonicParsing="false" onAction="#handleNewEpicycle" prefHeight="38.0" prefWidth="170.0" text="Add Epicycle">
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="19.0" />
+               </font></Button>
+            <Button fx:id="removeEpicycleButton" disable="true" mnemonicParsing="false" onAction="#handleRemoveEpicycle" prefHeight="37.0" prefWidth="170.0" text="Remove Epicycle">
+               <font>
+                  <Font size="19.0" />
+               </font></Button>
             <Separator prefHeight="40.0" prefWidth="200.0" />
-            <Button fx:id="addEpicycleButton" mnemonicParsing="false" onAction="#handleNewEpicycle" text="Add Epicycle" />
-            <Button fx:id="removeEpicycleButton" disable="true" mnemonicParsing="false" onAction="#handleRemoveEpicycle" text="Remove Epicycle" />
-            <Separator prefHeight="40.0" prefWidth="200.0" />
-            <ComboBox fx:id="menuBox" prefWidth="150.0" />
-            <VBox alignment="CENTER" spacing="10.0">
+            <ComboBox fx:id="menuBox" prefHeight="34.0" prefWidth="171.0" />
+            <VBox alignment="CENTER">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
-               <padding>
-                  <Insets top="30.0" />
-               </padding>
                <children>
-                  <Label text="Frequency (Hz)" />
+                  <Separator prefHeight="40.0" prefWidth="200.0" />
+                  <Label text="Frequency:" underline="true">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                     <tooltip>
+                        <Tooltip fx:id="frequencyTooltip" height="40.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Frequency is measured in Hz" width="40.0" />
+                     </tooltip>
+                  </Label>
                   <Slider fx:id="frequencySlider" blockIncrement="1.0" majorTickUnit="1.0" max="5.0" minorTickCount="0" onMouseReleased="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" value="1.0" />
-                  <Label text="Amplitude (radius)" />
-                  <Slider fx:id="amplitudeSlider" majorTickUnit="10.0" min="10.0" minorTickCount="0" onMouseReleased="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" />
-                  <Label text="Phase Offset (radians)" />
-                  <Slider fx:id="phaseSlider" blockIncrement="0.25" majorTickUnit="0.25" max="2.0" minorTickCount="0" onMouseReleased="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" />
-                  <Button fx:id="playButton" mnemonicParsing="false" text="Play" />
-                  <Button fx:id="pauseButton" disable="true" mnemonicParsing="false" text="Pause" />
-                  <Button fx:id="resetButton" disable="true" mnemonicParsing="false" text="Reset" />
+                  <Separator prefHeight="40.0" prefWidth="200.0" />
+                  <Label text="Amplitude:" underline="true">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                     <tooltip>
+                        <Tooltip fx:id="amplitudeTooltip" text="Amplitude changes Radius" />
+                     </tooltip>
+                  </Label>
+                  <Slider fx:id="amplitudeSlider" majorTickUnit="30.0" min="10.0" minorTickCount="2" onMouseDragged="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" />
+                  <Separator prefHeight="40.0" prefWidth="200.0" />
+                  <Label text="Phase Offset:" underline="true">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                     <tooltip>
+                        <Tooltip fx:id="phaseTooltip" text="Phase Offset changes starting angle" />
+                     </tooltip>
+                  </Label>
+                  <Slider fx:id="phaseSlider" blockIncrement="0.25" majorTickUnit="0.5" max="2.0" minorTickCount="2" onMouseDragged="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" />
+                  <Separator prefHeight="40.0" prefWidth="200.0" />
                </children>
             </VBox>
          </children></VBox>
@@ -65,6 +102,11 @@
    <left>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
+            <Separator prefHeight="40.0" prefWidth="200.0" />
+            <Button fx:id="addTabButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#handleNewTab" prefHeight="41.0" prefWidth="166.0" text="Add New Tab">
+               <font>
+                  <Font size="19.0" />
+               </font></Button>
             <Separator prefHeight="40.0" prefWidth="200.0" />
             <Label text="Stroke Size:" underline="true">
                <padding>
@@ -125,10 +167,31 @@
             <Separator prefHeight="40.0" prefWidth="200.0" />
          </children></VBox>
    </left>
-   <bottom>
-      <VBox prefHeight="60.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
-   </bottom>
    <center>
       <TabPane fx:id="epicycleTabPane" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-background-color: white;" tabClosingPolicy="ALL_TABS" BorderPane.alignment="CENTER" />
    </center>
+   <bottom>
+      <HBox alignment="CENTER" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="pauseButton" disable="true" mnemonicParsing="false" prefHeight="36.0" prefWidth="100.0" text="Pause">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="playButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" text="Play">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button fx:id="resetButton" disable="true" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" text="Reset">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" top="10.0" />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
 </BorderPane>
