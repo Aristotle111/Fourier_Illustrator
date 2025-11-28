@@ -55,6 +55,9 @@ public class PrimaryController {
             drawingSpeedSlider.setDisable(true);
             pointDensitySlider.setDisable(true);
             epicycleCount.setText(String.valueOf((dv.drawingVisual.getPoints().size())/2));
+            handleColorChanged();
+            handleStrokeSizeChanged();
+            handleOpacityChanged();
         });
 
         resetButton.setOnAction(eh -> {
@@ -67,6 +70,9 @@ public class PrimaryController {
             dv.clear();
             handlePointDensityChanged();
             handleDrawingSpeedChanged();
+            handleColorChanged();
+            handleStrokeSizeChanged();
+            handleOpacityChanged();
         });
 
         playButton.setOnAction(eh -> {

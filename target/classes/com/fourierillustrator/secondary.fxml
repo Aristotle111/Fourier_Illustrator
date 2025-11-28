@@ -50,11 +50,11 @@
                </padding>
                <children>
                   <Label text="Frequency (Hz)" />
-                  <Slider fx:id="frequencySlider" blockIncrement="1.0" majorTickUnit="1.0" max="5.0" minorTickCount="0" onMouseReleased="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" />
+                  <Slider fx:id="frequencySlider" blockIncrement="1.0" majorTickUnit="1.0" max="5.0" minorTickCount="0" onMouseReleased="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" value="1.0" />
                   <Label text="Amplitude (radius)" />
-                  <Slider fx:id="amplitudeSlider" majorTickUnit="10.0" min="10.0" minorTickCount="0" onMouseReleased="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                  <Slider fx:id="amplitudeSlider" majorTickUnit="10.0" min="10.0" minorTickCount="0" onMouseReleased="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" />
                   <Label text="Phase Offset (radians)" />
-                  <Slider fx:id="phaseSlider" blockIncrement="0.25" majorTickUnit="0.25" max="2.0" minorTickCount="0" onMouseReleased="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" snapToTicks="true" />
+                  <Slider fx:id="phaseSlider" blockIncrement="0.25" majorTickUnit="0.25" max="2.0" minorTickCount="0" onMouseReleased="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" />
                   <Button fx:id="playButton" mnemonicParsing="false" text="Play" />
                   <Button fx:id="pauseButton" disable="true" mnemonicParsing="false" text="Pause" />
                   <Button fx:id="resetButton" disable="true" mnemonicParsing="false" text="Reset" />
