@@ -118,7 +118,7 @@
             </Label>
             <VBox prefHeight="92.0" spacing="5.0">
                <children>
-                  <RadioButton fx:id="epicycleStrokeSmall" mnemonicParsing="false" text="Small">
+                  <RadioButton fx:id="epicycleStrokeSmall" mnemonicParsing="false" onAction="#handleEpicycleStrokeSizeChanged" text="Small">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -126,12 +126,12 @@
                         <ToggleGroup fx:id="epicycleStrokeSizeToggleGroup" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="epicycleStrokeMedium" mnemonicParsing="false" selected="true" text="Medium" toggleGroup="$epicycleStrokeSizeToggleGroup">
+                  <RadioButton fx:id="epicycleStrokeMedium" mnemonicParsing="false" onAction="#handleEpicycleStrokeSizeChanged" selected="true" text="Medium" toggleGroup="$epicycleStrokeSizeToggleGroup">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </RadioButton>
-                  <RadioButton fx:id="epicycleStrokeLarge" mnemonicParsing="false" text="Large" toggleGroup="$epicycleStrokeSizeToggleGroup">
+                  <RadioButton fx:id="epicycleStrokeLarge" mnemonicParsing="false" onAction="#handleEpicycleStrokeSizeChanged" text="Large" toggleGroup="$epicycleStrokeSizeToggleGroup">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -150,7 +150,7 @@
                   <Insets bottom="10.0" />
                </padding>
             </Label>
-            <Slider fx:id="epicycleStrokeOpacitySlider" blockIncrement="0.1" majorTickUnit="0.25" max="1.0" minorTickCount="1" onMouseReleased="#handleEpicycleStrokeOpacityChanged" showTickLabels="true" showTickMarks="true" value="1.0">
+            <Slider fx:id="epicycleStrokeOpacitySlider" blockIncrement="0.1" majorTickUnit="0.25" max="1.0" minorTickCount="1" onMouseDragged="#handleEpicycleStrokeOpacityChanged" showTickLabels="true" showTickMarks="true" value="1.0">
                <padding>
                   <Insets left="10.0" right="10.0" />
                </padding>

@@ -33,7 +33,7 @@ public class SecondaryController {
     @FXML private RadioButton epicycleStrokeSmall;
     @FXML private RadioButton epicycleStrokeMedium;
     @FXML private RadioButton epicycleStrokeLarge;
-    @FXML private ToggleGroup epicycleStrokeToggleGroup;
+    @FXML private ToggleGroup epicycleStrokeSizeToggleGroup;
     @FXML private Slider epicycleStrokeOpacitySlider;
     @FXML private ComboBox<String> menuBox;
     @FXML private Slider frequencySlider;
@@ -134,30 +134,39 @@ public class SecondaryController {
     
     @FXML
     public void handleEpicycleStrokeSizeChanged() {
-        String size = ((RadioButton) epicycleStrokeToggleGroup.getSelectedToggle()).getText();
-        switch (size) {
-            case "Small":
-                // Logic to update stroke size to small in the selected tab
-                break;
-            case "Medium":
-                // Logic to update stroke size to medium in the selected tab
-                break;
-            case "Large":
-                // Logic to update stroke size to large in the selected tab
-                break;
+        String size = ((RadioButton) epicycleStrokeSizeToggleGroup.getSelectedToggle()).getText();
+        Tab selectedTab = epicycleTabPane.getSelectionModel().getSelectedItem();
+        if (selectedTab != null) {
+            switch (size) {
+                case "Small":
+                    tabMap.get(selectedTab).getVisualization().pl.setStrokeWidth(2);
+                    break;
+                case "Medium":
+                    tabMap.get(selectedTab).getVisualization().pl.setStrokeWidth(5);
+                    break;
+                case "Large":
+                    tabMap.get(selectedTab).getVisualization().pl.setStrokeWidth(10);
+                    break;                
+            }
         }
     }
 
     @FXML
     public void handleEpicycleStrokeOpacityChanged() {
         double opacity = epicycleStrokeOpacitySlider.getValue();
-        // Logic to update the opacity of the epicycles in the selected tab
+        Tab selectedTab = epicycleTabPane.getSelectionModel().getSelectedItem();
+        if (selectedTab != null) {
+            tabMap.get(selectedTab).getVisualization().pl.setOpacity(opacity);
+        }
     }
 
     @FXML
     public void handleEpicycleStrokeColorChanged() {
         Color selectedColor = epicycleStrokeColorPicker.getValue();
-        // Logic to update the color of the epicycles in the selected tab
+        Tab selectedTab = epicycleTabPane.getSelectionModel().getSelectedItem();
+        if (selectedTab != null) {
+            tabMap.get(selectedTab).getVisualization().pl.setStroke(selectedColor);
+        }
     }
 
     @FXML
@@ -207,6 +216,7 @@ public class SecondaryController {
             visualization = new Visualization(pane, epicycles);
             visualization.setCenter(pane.getPrefWidth() / 2, pane.getPrefHeight() / 2);
             visualization.updateEpicycles(lastUpdate);
+            visualization.pl.setStrokeWidth(5);
             sceneTabs.add(this);
             tabMap.put(tab, this);
 
