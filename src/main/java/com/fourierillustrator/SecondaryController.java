@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ColorPicker;
@@ -17,8 +16,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
 
 
 public class SecondaryController {
@@ -75,6 +72,9 @@ public class SecondaryController {
             pauseButton.setDisable(false);
             resetButton.setDisable(false);
 
+            removeEpicycleButton.setDisable(true);
+            addEpicycleButton.setDisable(true);
+
             frequencySlider.setDisable(true);
             amplitudeSlider.setDisable(true);
             phaseSlider.setDisable(true);
@@ -94,6 +94,9 @@ public class SecondaryController {
             amplitudeSlider.setDisable(false);
             phaseSlider.setDisable(false);
             getCurrentSceneTab().getVisualization().reset();
+
+            removeEpicycleButton.setDisable(false);
+            addEpicycleButton.setDisable(false);
 
             frequencySlider.setDisable(false);
             amplitudeSlider.setDisable(false);
@@ -207,7 +210,6 @@ public class SecondaryController {
         }
 
         public void removeEpicycle() {
-            System.out.println(menuBox.getSelectionModel().getSelectedIndex());
             epicycles.remove(menuBox.getSelectionModel().getSelectedIndex());
             updateMenu(menuBox);
             visualization.setEpicycles(epicycles);
