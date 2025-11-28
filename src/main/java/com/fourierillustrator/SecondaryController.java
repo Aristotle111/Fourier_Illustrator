@@ -71,10 +71,11 @@ public class SecondaryController {
             playButton.setDisable(true);
             pauseButton.setDisable(false);
             resetButton.setDisable(false);
+            menuBox.setDisable(true);
 
             removeEpicycleButton.setDisable(true);
             addEpicycleButton.setDisable(true);
-
+            
             frequencySlider.setDisable(true);
             amplitudeSlider.setDisable(true);
             phaseSlider.setDisable(true);
@@ -84,6 +85,8 @@ public class SecondaryController {
             getCurrentSceneTab().getVisualization().pause();
             pauseButton.setDisable(true);
             playButton.setDisable(false);
+            getCurrentSceneTab().setIsPaused(true);
+            getCurrentSceneTab().setIsPlaying(false);
         });
 
         resetButton.setOnAction(eh -> {
@@ -93,7 +96,10 @@ public class SecondaryController {
             frequencySlider.setDisable(false);
             amplitudeSlider.setDisable(false);
             phaseSlider.setDisable(false);
+            menuBox.setDisable(false);
             getCurrentSceneTab().getVisualization().reset();
+            getCurrentSceneTab().setIsPlaying(false);
+            getCurrentSceneTab().setIsPaused(false);
 
             removeEpicycleButton.setDisable(false);
             addEpicycleButton.setDisable(false);
@@ -181,6 +187,8 @@ public class SecondaryController {
         private Visualization visualization;
         private ArrayList<Epicycle> epicycles;
         private int index;
+        private boolean isPlaying = false;
+        private boolean isPaused = false;
         
         public SceneTab() {
             index = (sceneTabs.size() == 0) ? 1 : sceneTabs.getLast().getIndex() + 1;
@@ -199,7 +207,9 @@ public class SecondaryController {
                 if (sceneTabs.isEmpty()) menuBox.getItems().clear();
             });
 
-            tab.setOnSelectionChanged(_ -> updateMenu(menuBox));
+            epicycleTabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {
+               updateMenu(menuBox, newTab);
+            });
         }
 
         public void addEpicycle() {
@@ -222,16 +232,90 @@ public class SecondaryController {
                 comboBox.getItems().add("Epicycle " + (i + 1));
             }
 
-            if (epicycles.isEmpty()) {
-                comboBox.setDisable(true);
+            if (isPlaying) {
                 removeEpicycleButton.setDisable(true);
+                addEpicycleButton.setDisable(true);
+                comboBox.setDisable(true);
                 playButton.setDisable(true);
+                pauseButton.setDisable(false);
+                resetButton.setDisable(false);
                 frequencySlider.setDisable(true);
                 amplitudeSlider.setDisable(true);
                 phaseSlider.setDisable(true);
                 return;
             }
 
+            if (epicycles.isEmpty()) {
+                addEpicycleButton.setDisable(false);
+                comboBox.setDisable(true);
+                removeEpicycleButton.setDisable(true);
+                playButton.setDisable(true);
+                frequencySlider.setDisable(true);
+                amplitudeSlider.setDisable(true);
+                phaseSlider.setDisable(true);
+                pauseButton.setDisable(true);
+                resetButton.setDisable(true);
+                return;
+            }
+
+            addEpicycleButton.setDisable(false);
+            removeEpicycleButton.setDisable(false);
+            comboBox.setDisable(false);
+            comboBox.getSelectionModel().select("Epicycle " + (epicycles.size()));
+            playButton.setDisable(false);
+            frequencySlider.setDisable(false);
+            amplitudeSlider.setDisable(false);
+            phaseSlider.setDisable(false);
+        }
+
+        public void updateMenu(ComboBox<String> comboBox, Tab newTab) {
+            comboBox.getItems().clear();
+            for (int i = 0; i < epicycles.size(); i++) {
+                comboBox.getItems().add("Epicycle " + (i + 1));
+            }
+
+            if (tabMap.get(newTab).getIsPlaying()) {
+                removeEpicycleButton.setDisable(true);
+                addEpicycleButton.setDisable(true);
+                comboBox.setDisable(true);
+                playButton.setDisable(true);
+                pauseButton.setDisable(false);
+                resetButton.setDisable(false);
+                frequencySlider.setDisable(true);
+                amplitudeSlider.setDisable(true);
+                phaseSlider.setDisable(true);
+                return;
+            }
+            if (tabMap.get(newTab).getIsPaused()) {
+                removeEpicycleButton.setDisable(true);
+                addEpicycleButton.setDisable(true);
+                comboBox.setDisable(true);
+                playButton.setDisable(false);
+                pauseButton.setDisable(true);
+                resetButton.setDisable(false);
+                frequencySlider.setDisable(true);
+                amplitudeSlider.setDisable(true);
+                phaseSlider.setDisable(true);
+                return;
+            }
+
+            if (tabMap.get(newTab).getEpicycles().isEmpty()) {
+                addEpicycleButton.setDisable(false);
+                comboBox.setDisable(true);
+                removeEpicycleButton.setDisable(true);
+                playButton.setDisable(true);
+                frequencySlider.setDisable(true);
+                amplitudeSlider.setDisable(true);
+                phaseSlider.setDisable(true);
+                pauseButton.setDisable(true);
+                resetButton.setDisable(true);
+                return;
+            }
+
+            resetButton.setDisable(true);
+            addEpicycleButton.setDisable(false);
+            pauseButton.setDisable(true);
+            playButton.setDisable(true);
             removeEpicycleButton.setDisable(false);
             comboBox.setDisable(false);
             comboBox.getSelectionModel().select("Epicycle " + (epicycles.size()));
@@ -255,10 +339,28 @@ public class SecondaryController {
 
         public void play() {
             visualization.start();
+            isPlaying = true;
+            isPaused = false;
         }
 
         public ArrayList<Epicycle> getEpicycles() {
             return epicycles;
+        }
+
+        public void setIsPlaying(boolean isPlaying) {
+            this.isPlaying = isPlaying;
+        }
+
+        public boolean getIsPlaying() {
+            return isPlaying;
+        }
+
+        public void setIsPaused(boolean isPaused) {
+            this.isPaused = isPaused;
+        }
+
+        public boolean getIsPaused() {
+            return isPaused;
         }
     }
 
