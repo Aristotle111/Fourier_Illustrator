@@ -216,7 +216,6 @@ public class SecondaryController {
             visualization = new Visualization(pane, epicycles);
             visualization.setCenter(pane.getPrefWidth() / 2, pane.getPrefHeight() / 2);
             visualization.updateEpicycles(lastUpdate);
-            visualization.pl.setStrokeWidth(5);
             sceneTabs.add(this);
             tabMap.put(tab, this);
 
@@ -245,6 +244,14 @@ public class SecondaryController {
         }
 
         public void updateMenu(ComboBox<String> comboBox) {
+            epicycleStrokeColorPicker.setValue((Color) visualization.pl.getStroke());
+            epicycleStrokeSizeToggleGroup.selectToggle(
+                (visualization.pl.getStrokeWidth() == 2) ? epicycleStrokeSmall :
+                (visualization.pl.getStrokeWidth() == 5) ? epicycleStrokeMedium :
+                epicycleStrokeLarge
+            );
+            epicycleStrokeOpacitySlider.setValue(visualization.pl.getOpacity());
+
             comboBox.getItems().clear();
             for (int i = 0; i < epicycles.size(); i++) {
                 comboBox.getItems().add("Epicycle " + (i + 1));
@@ -287,6 +294,14 @@ public class SecondaryController {
         }
 
         public void updateMenu(ComboBox<String> comboBox, Tab newTab) {
+            epicycleStrokeColorPicker.setValue((Color) visualization.pl.getStroke());
+            epicycleStrokeSizeToggleGroup.selectToggle(
+                (visualization.pl.getStrokeWidth() == 2) ? epicycleStrokeSmall :
+                (visualization.pl.getStrokeWidth() == 5) ? epicycleStrokeMedium :
+                epicycleStrokeLarge
+            );
+            epicycleStrokeOpacitySlider.setValue(visualization.pl.getOpacity());
+
             comboBox.getItems().clear();
             for (int i = 0; i < epicycles.size(); i++) {
                 comboBox.getItems().add("Epicycle " + (i + 1));
@@ -386,4 +401,17 @@ public class SecondaryController {
             Tab selectedTab = epicycleTabPane.getSelectionModel().getSelectedItem();
             return tabMap.get(selectedTab);
         }
+
+    @FXML
+    public void handleTabChanged() {
+        Tab selectedTab = epicycleTabPane.getSelectionModel().getSelectedItem();
+        SceneTab sceneTab = tabMap.get(selectedTab);
+        epicycleStrokeColorPicker.setValue((Color) sceneTab.visualization.pl.getStroke());
+            epicycleStrokeSizeToggleGroup.selectToggle(
+                (sceneTab.visualization.pl.getStrokeWidth() == 2) ? epicycleStrokeSmall :
+                (sceneTab.visualization.pl.getStrokeWidth() == 5) ? epicycleStrokeMedium :
+                epicycleStrokeLarge
+            );
+            epicycleStrokeOpacitySlider.setValue(sceneTab.visualization.pl.getOpacity());
+    }
 }
