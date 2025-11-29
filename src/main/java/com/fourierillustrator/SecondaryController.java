@@ -1,8 +1,10 @@
 package com.fourierillustrator;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -14,6 +16,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -22,6 +25,7 @@ import javafx.util.Duration;
 
 public class SecondaryController {
 
+    @FXML private BorderPane scene2BorderPane;
     @FXML private Pane mainPane;
     @FXML private ChoiceBox<String> sceneSelector2;
     @FXML private VBox sceneSelectorBox2;
@@ -121,7 +125,11 @@ public class SecondaryController {
 
     @FXML
     public void switchScene() {
-        Main.switchScenes();
+        try {
+            Main.setScene1();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -414,5 +422,19 @@ public class SecondaryController {
                 epicycleStrokeLarge
             );
             epicycleStrokeOpacitySlider.setValue(sceneTab.visualization.pl.getOpacity());
+    }
+
+    private void FadeOutToSceneOne() {
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), scene2BorderPane);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+        fadeOut.setOnFinished(e -> {
+            try {
+                Main.setScene1();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
+        fadeOut.play();
     }
 }

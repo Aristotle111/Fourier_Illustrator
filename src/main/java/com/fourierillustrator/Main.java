@@ -1,9 +1,14 @@
 package com.fourierillustrator;
 
+import java.io.IOException;
+
+import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Main extends Application {
     private static Scene scene1;
@@ -19,9 +24,15 @@ public class Main extends Application {
         Main.primaryStage = primaryStage;
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/fourierillustrator/primary.fxml"));
-        scene1 = new Scene(loader.load());
+        BorderPane root1 = loader.load();
+        root1.setOpacity(1.0);
+        scene1 = new Scene(root1);
+        
         loader = new FXMLLoader(getClass().getResource("/com/fourierillustrator/secondary.fxml"));
-        scene2 = new Scene(loader.load());
+        BorderPane root2 = loader.load();
+        root2.setOpacity(0.0);
+        scene2 = new Scene(root2);
+
         primaryStage.setTitle("GUI");
         primaryStage.setScene(scene1);
         primaryStage.show();
@@ -40,19 +51,45 @@ public class Main extends Application {
         currentScene = scene1;
     }
 
-    public static void setScene1() {
+    public static void setScene1() throws IOException {
         if (currentScene.equals(scene1)) {
             return;
         }
-        primaryStage.setScene(scene1);
-        currentScene = scene1;
+        BorderPane root2 = (BorderPane) scene2.getRoot();
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(400), root2);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+        fadeOut.setOnFinished(e -> {
+            primaryStage.setScene(scene1);
+            currentScene = scene1;
+            BorderPane root1 = (BorderPane) scene1.getRoot();
+            root1.setOpacity(0.0);
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(400), root1);
+            fadeIn.setFromValue(0.0);
+            fadeIn.setToValue(1.0);
+            fadeIn.play();
+        });
+        fadeOut.play();
     }
 
-    public static void setScene2() {
+    public static void setScene2() throws IOException {
         if (currentScene.equals(scene2)) {
             return;
         }
-        primaryStage.setScene(scene2);
-        currentScene = scene2;
+        BorderPane root1 = (BorderPane) scene1.getRoot();
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(400), root1);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+        fadeOut.setOnFinished(e -> {
+            primaryStage.setScene(scene2);
+            currentScene = scene2;
+            BorderPane root2 = (BorderPane) scene2.getRoot();
+            root2.setOpacity(0.0);
+            FadeTransition fadeIn = new FadeTransition(Duration.millis(400), root2);
+            fadeIn.setFromValue(0.0);
+            fadeIn.setToValue(1.0);
+            fadeIn.play();
+        });
+        fadeOut.play();
     }
 }

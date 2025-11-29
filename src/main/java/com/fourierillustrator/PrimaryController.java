@@ -1,5 +1,7 @@
 package com.fourierillustrator;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -10,12 +12,14 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class PrimaryController {
 
+    @FXML private BorderPane scene1BorderPane;
     @FXML private Button changeSceneButton1;
     @FXML private Pane mainPane;
     @FXML private ToggleButton showStrokeToggle;
@@ -90,7 +94,11 @@ public class PrimaryController {
 
     @FXML
     public void switchScene() {
-        Main.switchScenes();
+        try {
+            Main.setScene2();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         resetButton.setDisable(true);
         playButton.setDisable(true);
         pauseButton.setDisable(true);
@@ -101,6 +109,8 @@ public class PrimaryController {
         handlePointDensityChanged();
         handleDrawingSpeedChanged();
     }
+
+    
 
     @FXML
     public void handleStrokeToggle() {
@@ -163,4 +173,20 @@ public class PrimaryController {
         Color color = colorSelector.getValue();
         dv.v.pl.setStroke(color);
     }
+
+    /* 
+    private void FadeOutToSceneTwo() {
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), scene1BorderPane);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+        fadeOut.setOnFinished(e -> {
+            try {
+                Main.setScene2();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+        });
+        fadeOut.play();
+    }
+    */
 }
