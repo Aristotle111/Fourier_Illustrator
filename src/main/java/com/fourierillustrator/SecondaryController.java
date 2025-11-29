@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -422,19 +421,5 @@ public class SecondaryController {
                 epicycleStrokeLarge
             );
             epicycleStrokeOpacitySlider.setValue(sceneTab.visualization.pl.getOpacity());
-    }
-
-    private void FadeOutToSceneOne() {
-        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), scene2BorderPane);
-        fadeOut.setFromValue(1.0);
-        fadeOut.setToValue(0.0);
-        fadeOut.setOnFinished(e -> {
-            try {
-                Main.setScene1();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-        });
-        fadeOut.play();
     }
 }

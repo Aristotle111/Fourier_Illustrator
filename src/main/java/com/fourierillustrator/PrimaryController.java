@@ -173,20 +173,4 @@ public class PrimaryController {
         Color color = colorSelector.getValue();
         dv.v.pl.setStroke(color);
     }
-
-    /* 
-    private void FadeOutToSceneTwo() {
-        FadeTransition fadeOut = new FadeTransition(Duration.millis(500), scene1BorderPane);
-        fadeOut.setFromValue(1.0);
-        fadeOut.setToValue(0.0);
-        fadeOut.setOnFinished(e -> {
-            try {
-                Main.setScene2();
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-        });
-        fadeOut.play();
-    }
-    */
 }
