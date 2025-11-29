@@ -303,9 +303,10 @@ public class SecondaryController {
             epicycleStrokeOpacitySlider.setValue(visualization.pl.getOpacity());
 
             comboBox.getItems().clear();
-            for (int i = 0; i < epicycles.size(); i++) {
+            for (int i = 0; i < tabMap.get(newTab).getEpicycles().size(); i++) {
                 comboBox.getItems().add("Epicycle " + (i + 1));
             }
+            comboBox.getSelectionModel().select("Epicycle " + (tabMap.get(newTab).getEpicycles().size()));
 
             if (tabMap.get(newTab).getIsPlaying()) {
                 removeEpicycleButton.setDisable(true);
@@ -351,7 +352,7 @@ public class SecondaryController {
             playButton.setDisable(true);
             removeEpicycleButton.setDisable(false);
             comboBox.setDisable(false);
-            comboBox.getSelectionModel().select("Epicycle " + (epicycles.size()));
+            comboBox.getSelectionModel().select("Epicycle " + (tabMap.get(newTab).getEpicycles().size()));
             playButton.setDisable(false);
             frequencySlider.setDisable(false);
             amplitudeSlider.setDisable(false);
