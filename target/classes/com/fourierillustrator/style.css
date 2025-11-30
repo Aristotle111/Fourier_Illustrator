@@ -15,3 +15,8 @@
 .sceneSelector2 .menuItem > .label {
     -fx-font-size: 20px;
 }
+
+.fancy-button {
+    -fx-shape: "M 100 400 Q 100 400 125 450 L 425 450 Q 450 400 450 400 C 450 300 450 400 450 300 C 450 300 425 250 425 250 A 50 50 0 1 1 425 250 L 125 250 L 100 300 L 100 300 L 100 400 L 125 450 L 125 450 L 100 400 L 125 450 ";
+    -fx-background-color: white;
+}

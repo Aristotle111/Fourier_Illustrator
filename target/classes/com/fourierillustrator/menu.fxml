@@ -1,17 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1500.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fourierillustrator.MenuController">
-   
-   <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+   <top>
+      <VBox alignment="CENTER" prefHeight="357.0" prefWidth="1500.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="scene1Button" mnemonicParsing="false" onAction="#openScene1" text="Scene 1" />
-            <Button fx:id="scene2Button" mnemonicParsing="false" onAction="#openScene2" text="Scene 2" />
+            <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="127.0" prefWidth="1124.0" text="Fourier Illustrator">
+               <font>
+                  <Font name="Copperplate Gothic Bold" size="96.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="151.0" fitWidth="374.0" pickOnBounds="true">
+               <image>
+                  <Image url="@images/discreteFouriertransformformula.png" />
+               </image>
+            </ImageView>
          </children>
       </VBox>
-   </center>
+   </top>
+   <right>
+      <VBox alignment="CENTER" prefHeight="543.0" prefWidth="750.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="button2Border" fitHeight="110.0" fitWidth="222.0" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@images/Screenshot%202025-11-30%20173351.png" />
+                     </image>
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                  </ImageView>
+                  <Button fx:id="scene2Button" mnemonicParsing="false" onAction="#openScene2" onMouseEntered="#button2Hovered" onMouseExited="#button2Exited" prefHeight="49.0" prefWidth="170.0" style="-fx-border-color: black; -fx-border-width: 3px;" styleClass="fancy-button" stylesheets="@style.css" text="Epicycle Mode">
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
+                  <Label text="Mode 2">
+                     <font>
+                        <Font name="System Bold" size="40.0" />
+                     </font>
+                     <StackPane.margin>
+                        <Insets bottom="200.0" />
+                     </StackPane.margin>
+                  </Label>
+               </children>
+            </StackPane>
+         </children>
+      </VBox>
+   </right>
+   <left>
+      <VBox alignment="CENTER" prefHeight="543.0" prefWidth="750.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+         <children>
+            <StackPane prefHeight="150.0" prefWidth="200.0">
+               <children>
+                  <ImageView fx:id="button1Border" fitHeight="112.0" fitWidth="213.0" pickOnBounds="true" visible="false">
+                     <image>
+                        <Image url="@images/Screenshot%202025-11-30%20173351.png" />
+                     </image>
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                  </ImageView>
+                  <Button fx:id="scene1Button" mnemonicParsing="false" onAction="#openScene1" onMouseEntered="#button1Hovered" onMouseExited="#button1Exited" prefHeight="52.0" prefWidth="163.0" style="-fx-border-color: black; -fx-border-width: 3px;" styleClass="fancy-button" stylesheets="@style.css" text="Drawing Mode">
+                     <StackPane.margin>
+                        <Insets />
+                     </StackPane.margin>
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
+                  <Label text="Mode 1">
+                     <font>
+                        <Font name="System Bold" size="40.0" />
+                     </font>
+                     <StackPane.margin>
+                        <Insets bottom="200.0" />
+                     </StackPane.margin>
+                  </Label>
+               </children>
+            </StackPane>
+         </children>
+      </VBox>
+   </left>
 </BorderPane>
