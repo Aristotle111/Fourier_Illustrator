@@ -33,7 +33,7 @@ public class Main extends Application {
 
         loader = new FXMLLoader(getClass().getResource("/com/fourierillustrator/View/primary.fxml"));
         BorderPane root1 = loader.load();
-        root1.setOpacity(0);
+        root1.setOpacity(0.0);
         scene1 = new Scene(root1);
         
         loader = new FXMLLoader(getClass().getResource("/com/fourierillustrator/View/secondary.fxml"));

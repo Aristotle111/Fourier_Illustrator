@@ -64,7 +64,6 @@ public class PrimaryController {
             drawingSpeedSlider.setDisable(true);
             pointDensitySlider.setDisable(true);
             epicycleCount.setText(String.valueOf((drawingVisualization.getDrawingVisual().getPoints().size())/2));
-            epicycleCount.setText("NONE");
             handleColorChanged();
             handleStrokeSizeChanged();
             handleOpacityChanged();

@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="scene2BorderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1500.0" style="-fx-border-color: black; -fx-border-style: solid; -fx-border-width: 2px;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fourierillustrator.Controller.SecondaryController">
@@ -22,12 +23,12 @@
          <children>
             <Label text="Epicycle Mode">
                <font>
-                  <Font size="29.0" />
+                  <Font name="Forte" size="47.0" />
                </font>
             </Label>
-            <Button fx:id="changeSceneButton2" mnemonicParsing="false" onAction="#switchScene" text="Change Mode">
+            <Button fx:id="changeSceneButton2" mnemonicParsing="false" onAction="#switchScene" prefHeight="30.0" prefWidth="138.0" style="-fx-background-color: null; -fx-border-radius: 10px; -fx-border-color: black;" text="Change Mode">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Copperplate Gothic Bold" size="15.0" />
                </font>
             </Button>
          </children>
@@ -64,7 +65,7 @@
                         <Insets bottom="10.0" />
                      </padding>
                      <tooltip>
-                        <Tooltip fx:id="frequencyTooltip" height="40.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Frequency is measured in Hz" width="40.0" />
+                        <Tooltip fx:id="frequencyTooltip" height="40.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Frequency (Hz) changes the angular velocity" width="40.0" />
                      </tooltip>
                   </Label>
                   <Slider fx:id="frequencySlider" blockIncrement="1.0" majorTickUnit="1.0" max="5.0" min="-5.0" minorTickCount="0" onMouseReleased="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" snapToTicks="true" value="1.0" />
@@ -77,7 +78,7 @@
                         <Insets bottom="10.0" />
                      </padding>
                      <tooltip>
-                        <Tooltip fx:id="amplitudeTooltip" text="Amplitude changes Radius" />
+                        <Tooltip fx:id="amplitudeTooltip" text="Amplitude (m) changes radius" />
                      </tooltip>
                   </Label>
                   <Slider fx:id="amplitudeSlider" majorTickUnit="30.0" min="10.0" minorTickCount="2" onMouseDragged="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" />
@@ -90,7 +91,7 @@
                         <Insets bottom="10.0" />
                      </padding>
                      <tooltip>
-                        <Tooltip fx:id="phaseTooltip" text="Phase Offset changes starting angle" />
+                        <Tooltip fx:id="phaseTooltip" text="Phase Offset (radians) changes starting angle" />
                      </tooltip>
                   </Label>
                   <Slider fx:id="phaseSlider" blockIncrement="0.25" majorTickUnit="0.5" max="2.0" minorTickCount="2" onMouseDragged="#handleEpicycleUpdate" showTickLabels="true" showTickMarks="true" />
@@ -163,7 +164,10 @@
                <padding>
                   <Insets bottom="10.0" />
                </padding></Label>
-            <ColorPicker fx:id="epicycleStrokeColorPicker" onAction="#handleEpicycleStrokeColorChanged" prefHeight="42.0" prefWidth="174.0" />
+            <ColorPicker fx:id="epicycleStrokeColorPicker" onAction="#handleEpicycleStrokeColorChanged" prefHeight="42.0" prefWidth="174.0">
+               <value>
+                  <Color />
+               </value></ColorPicker>
             <Separator prefHeight="40.0" prefWidth="200.0" />
          </children></VBox>
    </left>
@@ -173,17 +177,17 @@
    <bottom>
       <HBox alignment="CENTER" spacing="20.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="pauseButton" disable="true" mnemonicParsing="false" prefHeight="36.0" prefWidth="100.0" text="Pause">
+            <Button fx:id="pauseButton" disable="true" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-width: 2px;" text="Pause">
                <font>
                   <Font size="16.0" />
                </font>
             </Button>
-            <Button fx:id="playButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" text="Play">
+            <Button fx:id="playButton" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-width: 2px;" text="Play">
                <font>
-                  <Font size="16.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Button>
-            <Button fx:id="resetButton" disable="true" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" text="Reset">
+            <Button fx:id="resetButton" disable="true" mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" style="-fx-border-color: black; -fx-border-width: 2px;" text="Reset">
                <font>
                   <Font size="16.0" />
                </font>

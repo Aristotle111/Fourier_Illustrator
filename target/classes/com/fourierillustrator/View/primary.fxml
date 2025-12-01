@@ -21,12 +21,12 @@
          <children>
             <Label text="Drawing Mode">
                <font>
-                  <Font size="29.0" />
+                  <Font name="Forte" size="46.0" />
                </font>
             </Label>
-            <Button fx:id="changeSceneButton1" mnemonicParsing="false" onAction="#switchScene" text="Change Mode">
+            <Button fx:id="changeSceneButton1" mnemonicParsing="false" onAction="#switchScene" prefHeight="30.0" prefWidth="144.0" style="-fx-border-color: black; -fx-background-color: null; -fx-border-radius: 10px;" stylesheets="@style.css" text="Change Mode">
                <font>
-                  <Font size="15.0" />
+                  <Font name="Copperplate Gothic Bold" size="15.0" />
                </font>
             </Button>
          </children>
@@ -61,19 +61,19 @@
             <Separator prefHeight="40.0" prefWidth="200.0" />
             <VBox alignment="CENTER" spacing="10.0">
                <children>
-                  <Button fx:id="playButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Play">
+                  <Button fx:id="playButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" stylesheets="@style.css" text="Play">
                      <font>
-                        <Font size="17.0" />
+                        <Font name="Felix Titling" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="pauseButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Pause">
+                  <Button fx:id="pauseButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" stylesheets="@style.css" text="Pause">
                      <font>
-                        <Font size="17.0" />
+                        <Font name="Felix Titling" size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="resetButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Reset">
+                  <Button fx:id="resetButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" stylesheets="@style.css" text="Reset">
                      <font>
-                        <Font size="17.0" />
+                        <Font name="Felix Titling" size="20.0" />
                      </font>
                   </Button>
                </children>

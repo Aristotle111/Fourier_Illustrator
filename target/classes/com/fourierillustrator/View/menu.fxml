@@ -6,6 +6,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -27,72 +28,74 @@
          </children>
       </VBox>
    </top>
-   <right>
-      <VBox alignment="CENTER" prefHeight="543.0" prefWidth="750.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
+   <center>
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <StackPane prefHeight="150.0" prefWidth="200.0">
+            <VBox alignment="CENTER" prefHeight="543.0" prefWidth="750.0" style="-fx-background-color: white;">
                <children>
-                  <ImageView fx:id="button2Border" fitHeight="110.0" fitWidth="220.0" pickOnBounds="true" visible="false">
-                     <image>
-                        <Image url="@images/Screenshot%202025-11-30%20173351.png" />
-                     </image>
-                     <StackPane.margin>
-                        <Insets />
-                     </StackPane.margin>
-                  </ImageView>
-                  <Button fx:id="scene2Button" mnemonicParsing="false" onAction="#openScene2" onMouseEntered="#button2Hovered" onMouseExited="#button2Exited" prefHeight="52.0" prefWidth="170.0" style="-fx-border-color: black; -fx-border-width: 3px;" styleClass="fancy-button" stylesheets="@style.css" text="Epicycle Mode">
-                     <StackPane.margin>
-                        <Insets />
-                     </StackPane.margin>
-                     <font>
-                        <Font name="System Bold" size="20.0" />
-                     </font>
-                  </Button>
-                  <Label text="Mode 2">
-                     <font>
-                        <Font name="System Bold" size="40.0" />
-                     </font>
-                     <StackPane.margin>
-                        <Insets bottom="200.0" />
-                     </StackPane.margin>
-                  </Label>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="button1Border" fitHeight="110.0" fitWidth="220.0" pickOnBounds="true" visible="false">
+                           <image>
+                              <Image url="@images/Screenshot%202025-11-30%20173351.png" />
+                           </image>
+                           <StackPane.margin>
+                              <Insets />
+                           </StackPane.margin>
+                        </ImageView>
+                        <Button fx:id="scene1Button" mnemonicParsing="false" onAction="#openScene1" onMouseEntered="#button1Hovered" onMouseExited="#button1Exited" prefHeight="52.0" prefWidth="170.0" style="-fx-border-color: black; -fx-border-width: 3px;" styleClass="fancy-button" stylesheets="@style.css" text="Drawing Mode">
+                           <StackPane.margin>
+                              <Insets />
+                           </StackPane.margin>
+                           <font>
+                              <Font name="System Bold" size="19.0" />
+                           </font>
+                        </Button>
+                        <Label text="Mode 1">
+                           <font>
+                              <Font name="System Bold" size="40.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets bottom="200.0" />
+                           </StackPane.margin>
+                        </Label>
+                     </children>
+                  </StackPane>
                </children>
-            </StackPane>
-         </children>
-      </VBox>
-   </right>
-   <left>
-      <VBox alignment="CENTER" prefHeight="543.0" prefWidth="750.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
-         <children>
-            <StackPane prefHeight="150.0" prefWidth="200.0">
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="543.0" prefWidth="750.0" style="-fx-background-color: white;">
                <children>
-                  <ImageView fx:id="button1Border" fitHeight="110.0" fitWidth="220.0" pickOnBounds="true" visible="false">
-                     <image>
-                        <Image url="@images/Screenshot%202025-11-30%20173351.png" />
-                     </image>
-                     <StackPane.margin>
-                        <Insets />
-                     </StackPane.margin>
-                  </ImageView>
-                  <Button fx:id="scene1Button" mnemonicParsing="false" onAction="#openScene1" onMouseEntered="#button1Hovered" onMouseExited="#button1Exited" prefHeight="52.0" prefWidth="170.0" style="-fx-border-color: black; -fx-border-width: 3px;" styleClass="fancy-button" stylesheets="@style.css" text="Drawing Mode">
-                     <StackPane.margin>
-                        <Insets />
-                     </StackPane.margin>
-                     <font>
-                        <Font name="System Bold" size="19.0" />
-                     </font>
-                  </Button>
-                  <Label text="Mode 1">
-                     <font>
-                        <Font name="System Bold" size="40.0" />
-                     </font>
-                     <StackPane.margin>
-                        <Insets bottom="200.0" />
-                     </StackPane.margin>
-                  </Label>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="button2Border" fitHeight="110.0" fitWidth="220.0" pickOnBounds="true" visible="false">
+                           <image>
+                              <Image url="@images/Screenshot%202025-11-30%20173351.png" />
+                           </image>
+                           <StackPane.margin>
+                              <Insets />
+                           </StackPane.margin>
+                        </ImageView>
+                        <Button fx:id="scene2Button" mnemonicParsing="false" onAction="#openScene2" onMouseEntered="#button2Hovered" onMouseExited="#button2Exited" prefHeight="52.0" prefWidth="170.0" style="-fx-border-color: black; -fx-border-width: 3px;" styleClass="fancy-button" stylesheets="@style.css" text="Epicycle Mode">
+                           <StackPane.margin>
+                              <Insets />
+                           </StackPane.margin>
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Button>
+                        <Label text="Mode 2">
+                           <font>
+                              <Font name="System Bold" size="40.0" />
+                           </font>
+                           <StackPane.margin>
+                              <Insets bottom="200.0" />
+                           </StackPane.margin>
+                        </Label>
+                     </children>
+                  </StackPane>
                </children>
-            </StackPane>
+            </VBox>
          </children>
-      </VBox>
-   </left>
+      </HBox>
+   </center>
 </BorderPane>
