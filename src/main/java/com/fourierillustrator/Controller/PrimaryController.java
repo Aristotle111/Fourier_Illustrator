@@ -55,12 +55,16 @@ public class PrimaryController {
         resetButton.setDisable(true);
 
         mainPane.addEventHandler(MouseEvent.MOUSE_DRAGGED, eh -> {
+            showStrokeToggle.setSelected(false);
+            showStrokeToggle.setText("Hide Original Stroke");
+            handleStrokeToggle();
             playButton.setDisable(true);
             pauseButton.setDisable(false);
             resetButton.setDisable(false);
             drawingSpeedSlider.setDisable(true);
             pointDensitySlider.setDisable(true);
             epicycleCount.setText(String.valueOf((drawingVisualization.getDrawingVisual().getPoints().size())/2));
+            epicycleCount.setText("NONE");
             handleColorChanged();
             handleStrokeSizeChanged();
             handleOpacityChanged();
@@ -72,6 +76,8 @@ public class PrimaryController {
             pauseButton.setDisable(true);
             drawingSpeedSlider.setDisable(false);
             pointDensitySlider.setDisable(false);
+            showStrokeToggle.setSelected(false);
+            showStrokeToggle.setText("Hide Original Stroke");
             epicycleCount.setText("NONE");
             drawingVisualization.clear();
             handlePointDensityChanged();
