@@ -46,17 +46,10 @@ public class Main extends Application {
         currentScene = menuScene;
     }
 
-    public static void switchScenes() {
-        if (currentScene.equals(scene1)) {
-            primaryStage.setScene(scene2);
-            currentScene = scene2;
-            return;
-        }
-
-        primaryStage.setScene(scene1);
-        currentScene = scene1;
-    }
-
+    /**
+     * Displays scene 1
+     * @throws IOException scene not found error
+     */
     public static void setScene1() throws IOException {
         if (currentScene.equals(scene1)) {
             return;
@@ -78,6 +71,10 @@ public class Main extends Application {
         fadeOut.play();
     }
 
+    /**
+     * Displays scene 1 from menu
+     * @throws IOException scene not found error
+     */
     public static void setScene1FromMenu() throws IOException {
         if (currentScene.equals(scene1)) {
             return;
@@ -99,6 +96,10 @@ public class Main extends Application {
         fadeOut.play();
     }
 
+    /**
+     * Displays scene 2
+     * @throws IOException scene not found error
+     */
     public static void setScene2() throws IOException {
         if (currentScene.equals(scene2)) {
             return;
@@ -120,6 +121,10 @@ public class Main extends Application {
         fadeOut.play();
     }
 
+    /**
+     * Displays scene 2 from menu
+     * @throws IOException scene not found error
+     */
     public static void setScene2FromMenu() throws IOException {
         if (currentScene.equals(scene2)) {
             return;

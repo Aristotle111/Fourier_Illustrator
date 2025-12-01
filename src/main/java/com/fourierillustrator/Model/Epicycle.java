@@ -36,6 +36,12 @@ public class Epicycle {
         circle.setFill(null); circle.setStroke(Color.BLACK);
     }
 
+    /**
+     * Updates the epicycle based on its new starting position and the current simulation time
+     * @param seconds the current time
+     * @param newStartX the new starting X coordinate
+     * @param newStartY the new starting Y coordinate
+     */
     public void update(double seconds, double newStartX, double newStartY) {
         startX = newStartX;
         startY = newStartY;
@@ -51,6 +57,12 @@ public class Epicycle {
         circle.setCenterY(newStartY);
     }
 
+    /**
+     * Updates the inner epicycle parameters 
+     * @param frequency the new frequency
+     * @param amplitude the new amplitude
+     * @param phaseCoefficient the new phase coefficient
+     */
     public void changeParams(double frequency, double amplitude, double phaseCoefficient) {
         omega = frequency * 2 * Math.PI;
         radius = amplitude;
@@ -63,6 +75,10 @@ public class Epicycle {
         pane.getChildren().add(circle);
     }
 
+    /**
+     * Toggles visibilty of the epicycle circle
+     * @param showCircles
+     */
     public void toggleCircles(boolean showCircles) {
         if (!showCircles) circle.setStroke(null);
         else circle.setStroke(Color.BLACK);

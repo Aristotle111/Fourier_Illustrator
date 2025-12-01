@@ -42,12 +42,11 @@ public class PrimaryController {
     @FXML private ColorPicker colorSelector;
     @FXML private Label epicycleCount;
 
-    private DrawingVisualization dv;
+    private DrawingVisualization drawingVisualization;
     
-
     @FXML
-    public void initialize() {
-        dv = new DrawingVisualization(mainPane);
+    private void initialize() {
+        drawingVisualization = new DrawingVisualization(mainPane);
         handleEpicyclesToggled();
         handleDrawingSpeedChanged();
 
@@ -61,7 +60,7 @@ public class PrimaryController {
             resetButton.setDisable(false);
             drawingSpeedSlider.setDisable(true);
             pointDensitySlider.setDisable(true);
-            epicycleCount.setText(String.valueOf((dv.getDrawingVisual().getPoints().size())/2));
+            epicycleCount.setText(String.valueOf((drawingVisualization.getDrawingVisual().getPoints().size())/2));
             handleColorChanged();
             handleStrokeSizeChanged();
             handleOpacityChanged();
@@ -74,7 +73,7 @@ public class PrimaryController {
             drawingSpeedSlider.setDisable(false);
             pointDensitySlider.setDisable(false);
             epicycleCount.setText("NONE");
-            dv.clear();
+            drawingVisualization.clear();
             handlePointDensityChanged();
             handleDrawingSpeedChanged();
             handleColorChanged();
@@ -83,20 +82,23 @@ public class PrimaryController {
         });
 
         playButton.setOnAction(eh -> {
-            dv.getV().start();
+            drawingVisualization.getV().start();
             playButton.setDisable(true);
             pauseButton.setDisable(false);
         });
 
         pauseButton.setOnAction(eh -> {
-            dv.getV().pause();
+            drawingVisualization.getV().pause();
             pauseButton.setDisable(true);
             playButton.setDisable(false);
         });
     }
 
+    /**
+     * Switches to scene 2
+     */
     @FXML
-    public void switchScene() {
+    private void switchScene() {
         try {
             Main.setScene2();
         } catch (IOException e) {
@@ -108,72 +110,91 @@ public class PrimaryController {
         drawingSpeedSlider.setDisable(false);
         pointDensitySlider.setDisable(false);
         epicycleCount.setText("NONE");
-        dv.clear();
+        drawingVisualization.clear();
         handlePointDensityChanged();
         handleDrawingSpeedChanged();
     }
 
-    
-
+    /**
+     * Toggles the stroke visibility of the original epicycle drawing
+     */
     @FXML
-    public void handleStrokeToggle() {
+    private void handleStrokeToggle() {
         if (showStrokeToggle.isSelected()) {
-            dv.getDrawingVisual().setOpacity(0);
+            drawingVisualization.getDrawingVisual().setOpacity(0);
             showStrokeToggle.setText("Show Original Stroke");
             return;
         }
-        dv.getDrawingVisual().setOpacity(1);
+        drawingVisualization.getDrawingVisual().setOpacity(1);
         showStrokeToggle.setText("Hide Original Stroke");
     }
 
+    /**
+     * Toggles the epicycle circle visibility of the epicycle drawing
+     */
     @FXML
-    public void handleEpicyclesToggled() {
+    private void handleEpicyclesToggled() {
         if (hideEpicyclesToggleButton.isSelected()) {
-            dv.setShowCircles(false);
+            drawingVisualization.setShowCircles(false);
             hideEpicyclesToggleButton.setText("Show Epicycles");
             return;
         }
-        dv.setShowCircles(true);
+        drawingVisualization.setShowCircles(true);
         hideEpicyclesToggleButton.setText("Hide Epicycles");
     }
 
+    /**
+     * Updates the stroke size
+     */
     @FXML
-    public void handleStrokeSizeChanged() {
+    private void handleStrokeSizeChanged() {
         String size = ((RadioButton) strokeSizeGroup.getSelectedToggle()).getText();
         switch (size) {
             case "Small":
-                dv.getV().getPl().setStrokeWidth(2);
+                drawingVisualization.getV().getPl().setStrokeWidth(2);
                 break;
             case "Medium":
-                dv.getV().getPl().setStrokeWidth(5);
+                drawingVisualization.getV().getPl().setStrokeWidth(5);
                 break;
             case "Large":
-                dv.getV().getPl().setStrokeWidth(10);
+                drawingVisualization.getV().getPl().setStrokeWidth(10);
                 break;
         }
     }
 
+    /**
+     * Updates the drawing speed
+     */
     @FXML 
-    public void handleDrawingSpeedChanged() {
+    private void handleDrawingSpeedChanged() {
         double speed = drawingSpeedSlider.getValue();
-        dv.setMultiplier(speed);
+        drawingVisualization.setMultiplier(speed);
     }
 
+    /**
+     * Updates the drawing point density
+     */
     @FXML 
-    public void handlePointDensityChanged() {
+    private void handlePointDensityChanged() {
         double density = pointDensitySlider.getValue();
-        dv.setDT(200000000 - (density * 1.5));
+        drawingVisualization.setDT(200000000 - (density * 1.5));
     }
 
+    /**
+     * Updates the drawing opacity
+     */
     @FXML 
-    public void handleOpacityChanged() {
+    private void handleOpacityChanged() {
         double opacity = opacitySlider.getValue();
-        dv.getV().getPl().setOpacity(opacity);
+        drawingVisualization.getV().getPl().setOpacity(opacity);
     }
 
+    /**
+     * Updates the drawing color
+     */
     @FXML 
-    public void handleColorChanged() {
+    private void handleColorChanged() {
         Color color = colorSelector.getValue();
-        dv.getV().getPl().setStroke(color);
+        drawingVisualization.getV().getPl().setStroke(color);
     }
 }

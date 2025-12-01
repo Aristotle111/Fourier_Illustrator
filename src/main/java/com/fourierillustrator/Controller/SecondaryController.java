@@ -56,10 +56,12 @@ public class SecondaryController {
 
     private ArrayList<SceneTab> sceneTabs;
     private HashMap<Tab, SceneTab> tabMap;
-    private double lastUpdate = 0;
 
+    /**
+     * Initialize key GUI elements and prepare interface for user
+     */
     @FXML
-    public void initialize() {
+    private void initialize() {
         sceneTabs = new ArrayList<>();
         tabMap = new HashMap<>();
         handleNewTab();
@@ -125,9 +127,11 @@ public class SecondaryController {
         });
     }
 
-
+    /**
+     * Switches to scene 1
+     */
     @FXML
-    public void switchScene() {
+    private void switchScene() {
         try {
             Main.setScene1();
         } catch (IOException e) {
@@ -135,16 +139,22 @@ public class SecondaryController {
         }
     }
 
+    /**
+     * Creates new tab upon user request
+     */
     @FXML
-    public void handleNewTab() {
+    private void handleNewTab() {
         SceneTab newTab = new SceneTab();
         epicycleTabPane.getTabs().add(newTab.getTab());
         epicycleTabPane.getSelectionModel().select(newTab.getTab());
-        newTab.updateMenu(menuBox);
+        newTab.updateMenu();
     }
     
+    /**
+     * Changes epicycle stroke size upon user request
+     */
     @FXML
-    public void handleEpicycleStrokeSizeChanged() {
+    private void handleEpicycleStrokeSizeChanged() {
         String size = ((RadioButton) epicycleStrokeSizeToggleGroup.getSelectedToggle()).getText();
         Tab selectedTab = epicycleTabPane.getSelectionModel().getSelectedItem();
         if (selectedTab != null) {
@@ -162,8 +172,11 @@ public class SecondaryController {
         }
     }
 
+    /**
+     * Changes epicycle stroke opacity upon user request
+     */
     @FXML
-    public void handleEpicycleStrokeOpacityChanged() {
+    private void handleEpicycleStrokeOpacityChanged() {
         double opacity = epicycleStrokeOpacitySlider.getValue();
         Tab selectedTab = epicycleTabPane.getSelectionModel().getSelectedItem();
         if (selectedTab != null) {
@@ -171,8 +184,11 @@ public class SecondaryController {
         }
     }
 
+    /**
+     * Changes epicycle stroke color upon user request
+     */
     @FXML
-    public void handleEpicycleStrokeColorChanged() {
+    private void handleEpicycleStrokeColorChanged() {
         Color selectedColor = epicycleStrokeColorPicker.getValue();
         Tab selectedTab = epicycleTabPane.getSelectionModel().getSelectedItem();
         if (selectedTab != null) {
@@ -180,8 +196,11 @@ public class SecondaryController {
         }
     }
 
+    /**
+     * Creates new epicycle upon user request
+     */
     @FXML
-    public void handleNewEpicycle() {
+    private void handleNewEpicycle() {
         Tab selectedTab = epicycleTabPane.getSelectionModel().getSelectedItem();
         if (selectedTab != null) {
             SceneTab sceneTab = tabMap.get(selectedTab);
@@ -190,8 +209,11 @@ public class SecondaryController {
         }
     }
 
+    /**
+     * Removes current epicycle upon user request
+     */
     @FXML
-    public void handleRemoveEpicycle() {
+    private void handleRemoveEpicycle() {
         Tab selectedTab = epicycleTabPane.getSelectionModel().getSelectedItem();
         if (selectedTab != null) {
             SceneTab sceneTab = tabMap.get(selectedTab);
@@ -200,13 +222,16 @@ public class SecondaryController {
         }
     }
 
+    /**
+     * Updates epicycles displayed on screen with user changes
+     */
     @FXML
-    public void handleEpicycleUpdate() {
+    private void handleEpicycleUpdate() {
         if (getCurrentSceneTab().getEpicycles().isEmpty()) return;
 
         Epicycle currentEpicycle = getCurrentSceneTab().getEpicycles().get(menuBox.getSelectionModel().getSelectedIndex());
         currentEpicycle.changeParams(frequencySlider.getValue(), amplitudeSlider.getValue(), phaseSlider.getValue()); 
-        getCurrentSceneTab().getVisualization().updateEpicycles(lastUpdate);  
+        getCurrentSceneTab().getVisualization().updateEpicycles(0);  
     }
 
     private class SceneTab {
@@ -226,7 +251,7 @@ public class SecondaryController {
             epicycles = new ArrayList<>();
             visualization = new Visualization(pane, epicycles);
             visualization.setCenter(pane.getPrefWidth() / 2, pane.getPrefHeight() / 2);
-            visualization.updateEpicycles(lastUpdate);
+            visualization.updateEpicycles(0);
             sceneTabs.add(this);
             tabMap.put(tab, this);
 
@@ -236,25 +261,35 @@ public class SecondaryController {
             });
 
             epicycleTabPane.getSelectionModel().selectedItemProperty().addListener((observable, oldTab, newTab) -> {
-               updateMenu(menuBox, newTab);
+               updateMenu(newTab);
             });
         }
 
+        /**
+         * Adds an epicycle to the tab
+         */
         public void addEpicycle() {
             epicycles.add(new Epicycle(1, 50, 0));
-            updateMenu(menuBox);
+            updateMenu();
             visualization.setEpicycles(epicycles);
-            visualization.updateEpicycles(lastUpdate);
+            visualization.updateEpicycles(0);
         }
 
+        /**
+         * Removes current epicycle from the tab
+         */
         public void removeEpicycle() {
             epicycles.remove(menuBox.getSelectionModel().getSelectedIndex());
-            updateMenu(menuBox);
+            updateMenu();
             visualization.setEpicycles(epicycles);
-            visualization.updateEpicycles(lastUpdate);
+            visualization.updateEpicycles(0);
         }
 
-        public void updateMenu(ComboBox<String> comboBox) {
+        /**
+         * Updates the menu elements to insure they display the correct information
+         */
+        public void updateMenu() {
+            ComboBox<String> comboBox = menuBox;
             epicycleStrokeColorPicker.setValue((Color) visualization.getPl().getStroke());
             epicycleStrokeSizeToggleGroup.selectToggle(
                 (visualization.getPl().getStrokeWidth() == 2) ? epicycleStrokeSmall :
@@ -303,7 +338,13 @@ public class SecondaryController {
             phaseSlider.setDisable(false);
         }
 
-        public void updateMenu(ComboBox<String> comboBox, Tab newTab) {
+        /**
+         * Updates the menu elements when the user switches tabs
+         * @param newTab the new tab that is being switched to
+         */
+        public void updateMenu(Tab newTab) {
+            ComboBox<String> comboBox = menuBox;
+
             epicycleStrokeColorPicker.setValue((Color) visualization.getPl().getStroke());
             epicycleStrokeSizeToggleGroup.selectToggle(
                 (visualization.getPl().getStrokeWidth() == 2) ? epicycleStrokeSmall :
@@ -407,13 +448,20 @@ public class SecondaryController {
         }
     }
 
+    /**
+     * Returns the active scene tab
+     * @return the currently selected scene tab
+     */
     private SceneTab getCurrentSceneTab() {
             Tab selectedTab = epicycleTabPane.getSelectionModel().getSelectedItem();
             return tabMap.get(selectedTab);
         }
 
+    /**
+     * Updates the GUI based on the the newly switched to tab
+     */
     @FXML
-    public void handleTabChanged() {
+    private void handleTabChanged() {
         Tab selectedTab = epicycleTabPane.getSelectionModel().getSelectedItem();
         SceneTab sceneTab = tabMap.get(selectedTab);
         epicycleStrokeColorPicker.setValue((Color) sceneTab.visualization.getPl().getStroke());

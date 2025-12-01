@@ -10,31 +10,24 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Polyline;
 
 public class Visualization {
-    Pane pane;
-    Polyline pl;
-    LinkedList<Epicycle> epicycles;
-    VisualLogic animation;
-    double multiplier = 1;
-    double period;
-    double periodProgress = 0;
+    private Pane pane;
+    private Polyline polyline;
+    private LinkedList<Epicycle> epicycles;
+    private VisualLogic animation;
+    private double multiplier = 1;
 
-    //class instance config
-    double centerX = 450;
-    double centerY = 450;
-    
-    //user customizable variables
-    boolean showCircles = true;
-    Color strokeColor = Color.BLACK;
+    private double centerX = 450;
+    private double centerY = 450;
 
     public Visualization(Pane pane) {
         this.pane = pane;
         this.epicycles = new LinkedList<Epicycle>();
         animation = new VisualLogic();
         
-        pl = new Polyline();
-        pl.setStroke(Color.BLACK);
-        pl.setStrokeWidth(5);
-        pane.getChildren().addAll(pl);
+        polyline = new Polyline();
+        polyline.setStroke(Color.BLACK);
+        polyline.setStrokeWidth(5);
+        pane.getChildren().addAll(polyline);
     }
 
     public Visualization(Pane pane, Epicycle[] epicycles) {
@@ -42,10 +35,10 @@ public class Visualization {
         setEpicycles(epicycles);
         animation = new VisualLogic();
         
-        pl = new Polyline();
-        pl.setStroke(Color.BLACK);
-        pl.setStrokeWidth(4);
-        pane.getChildren().add(pl);
+        polyline = new Polyline();
+        polyline.setStroke(Color.BLACK);
+        polyline.setStrokeWidth(4);
+        pane.getChildren().add(polyline);
     }
 
     public Visualization(Pane pane, ArrayList<Epicycle> epicycles) {
@@ -53,12 +46,16 @@ public class Visualization {
         setEpicycles(epicycles);
         animation = new VisualLogic();
         
-        pl = new Polyline();
-        pl.setStroke(Color.BLACK);
-        pl.setStrokeWidth(5);
-        pane.getChildren().add(pl);
+        polyline = new Polyline();
+        polyline.setStroke(Color.BLACK);
+        polyline.setStrokeWidth(5);
+        pane.getChildren().add(polyline);
     }
 
+    /**
+     * Sets the epicycles to be used by the visualization
+     * @param epicycles the epicycles to be visualized
+     */
     public void setEpicycles(Epicycle[] epicycles) {
         if (this.epicycles != null) {
             for (Epicycle e : this.epicycles) {
@@ -73,6 +70,10 @@ public class Visualization {
         }
     }
 
+    /**
+     * Sets the epicycles to be used by the visualization
+     * @param epicycles the arraylist of epicycles to be visualized
+     */
     public void setEpicycles(ArrayList<Epicycle> epicycles) {
         if (this.epicycles != null) {
             for (Epicycle e : this.epicycles) {
@@ -87,8 +88,12 @@ public class Visualization {
         }
     }
 
-    public Boolean start() {
-        pl.getPoints().clear();
+    /**
+     * Starts the visualization
+     * @return whether the start was successful
+     */
+    public boolean start() {
+        polyline.getPoints().clear();
 
         if (epicycles.size() == 0) return false;
         
@@ -97,6 +102,10 @@ public class Visualization {
         
     }
 
+    /**
+     * Updates the epicycles currently being displayed
+     * @param seconds the current simulation time
+     */
     public void updateEpicycles(double seconds) {
         if (epicycles.isEmpty()) return;
         
@@ -105,10 +114,11 @@ public class Visualization {
         for (int i = 1; i < epicycles.size(); i++) {     
             epicycles.get(i).update(seconds, epicycles.get(i - 1).getEndX(), epicycles.get(i - 1).getEndY());
         }
-        //dubious code
-        //if ((seconds % period) + animation.DELTA_T / 1_000_000_000.0 >= period) pl.getPoints().clear();
     }
 
+    /**
+     * Pauses the simulation
+     */
     public void pause() {
         animation.stop();
         animation.isPaused = true;
@@ -116,12 +126,15 @@ public class Visualization {
     }
 
     private class VisualLogic extends AnimationTimer {
-        final double DELTA_T = 100000000; //nanoseconds, sample frequency = 1000000000/delta_t 
-        long lastUpdate = 0;
-        long startTime = -1;
-        long currentTime;
-        boolean isPaused = false;
+        private final double DELTA_T = 100000000; //nanoseconds, sample frequency = 1000000000/delta_t 
+        private long lastUpdate = 0;
+        private long startTime = -1;
+        private long currentTime;
+        private boolean isPaused = false;
         
+        /**
+         * Handles timing logic for animation
+         */
         @Override
         public void handle(long now) {
             if (isPaused) {
@@ -141,26 +154,21 @@ public class Visualization {
 
             updateEpicycles(seconds);
             
-            pl.getPoints().addAll(new Double[]{
+            polyline.getPoints().addAll(new Double[]{
             epicycles.get(epicycles.size() - 1).getEndX(), epicycles.get(epicycles.size() - 1).getEndY()  // New Point 4 (x, y)
             });
                 
         }
     }
 
+    /**
+     * Resets the simulation
+     */
     public void reset() {
         updateEpicycles(0);
-        pl.getPoints().clear();
+        polyline.getPoints().clear();
         animation.stop();
         animation.startTime = -1;
-    }
-
-    public void setShowCircles(Boolean showCircles) {
-        this.showCircles = showCircles;
-    }
-
-    public void setStrokeColor(Color color) {
-        strokeColor = color;
     }
 
     public void setCenter(double centerX, double centerY) {
@@ -177,6 +185,6 @@ public class Visualization {
     }
 
     public Polyline getPl() {
-        return pl;
+        return polyline;
     }
 }

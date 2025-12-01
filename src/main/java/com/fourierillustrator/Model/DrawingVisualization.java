@@ -6,45 +6,49 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polyline;
 
 public class DrawingVisualization {
-    Pane pane;
-    Polyline drawingVisual;
-    DrawingLogic dl;
-    Visualization v;
+    private Pane pane;
+    private Polyline drawingVisual;
+    private DrawingLogic drawingLogic;
+    private Visualization visualization;
 
     public DrawingVisualization(Pane pane) {
         this.pane = pane;
         drawingVisual = new Polyline();
-        dl = new DrawingLogic();
-        v = new Visualization(pane);
+        drawingLogic = new DrawingLogic();
+        visualization = new Visualization(pane);
 
-        pane.setOnMouseDragged(event -> dl.update(event));
-        pane.setOnMousePressed(event -> dl.start(event));
-        pane.setOnMouseReleased(event -> dl.stop(event));
+        pane.setOnMouseDragged(event -> drawingLogic.update(event));
+        pane.setOnMousePressed(event -> drawingLogic.start(event));
+        pane.setOnMouseReleased(event -> drawingLogic.stop(event));
 
         drawingVisual = new Polyline();
         pane.getChildren().addAll(drawingVisual);
     }
 
-
-
     private class DrawingLogic extends AnimationTimer {
         //final 
-        double DELTA_T = 10000; //nanoseconds, sample frequency = 1000000000/delta_t 
-        long lastUpdate = 0;
-        long startTime;
-        double startX;
-        double startY;
-        double x;
-        double y;
-        //Polyline drawingVisual = Main.drawingVisual;
+        private double DELTA_T = 10000; //nanoseconds, sample frequency = 1000000000/delta_t 
+        private long lastUpdate = 0;
+        private long startTime;
+        private double startX;
+        private double startY;
+        private double x;
+        private double y;
 
-        
-        public void update(MouseEvent event) {
+        /**
+         * Updates internal mouse position variables with new mouse position
+         * @param event the mouse event containg the new positions
+         */
+        private void update(MouseEvent event) {
             x = event.getX();
             y = event.getY();
         }
 
-        public void start(MouseEvent event) {
+        /**
+         * Starts recording the user drawing
+         * @param event the initial mouse event
+         */
+        private void start(MouseEvent event) {
             startTime = -1; 
             lastUpdate = 0;
             startX = event.getX();
@@ -56,7 +60,11 @@ public class DrawingVisualization {
             super.start();
         }
 
-        public void stop(MouseEvent event) {
+        /**
+         * Stops recording the user drawing
+         * @param event the final mouse event
+         */
+        private void stop(MouseEvent event) {
             super.stop();
             drawingVisual.getPoints().addAll(startX, startY);
             
@@ -71,9 +79,9 @@ public class DrawingVisualization {
             FourierLogic.Transform transform = FourierLogic.complexTransform(data, dt);
             Epicycle[] epicycles = transform.epicycles().toArray(new Epicycle[0]);
             
-            v.setEpicycles(epicycles);
-            v.setCenter(transform.centerX(), transform.centerY());
-            v.start();
+            visualization.setEpicycles(epicycles);
+            visualization.setCenter(transform.centerX(), transform.centerY());
+            visualization.start();
         }
 
         @Override
@@ -89,25 +97,28 @@ public class DrawingVisualization {
         }
     }
 
-    public void setMultiplier(double multiplier) {
-        v.setMultiplier(multiplier);
-    }
-
-    public void setShowCircles(boolean showCircles) {
-        for (Object e : v.getEpicycles()) {
-            if (e instanceof Epicycle epicycle) epicycle.toggleCircles(showCircles);
-        }
-    }
-
+    /**
+     * Clears current drawing
+     */
     public void clear() {
         pane.getChildren().clear();
-        v = new Visualization(pane);
+        visualization = new Visualization(pane);
         drawingVisual = new Polyline();
         pane.getChildren().addAll(drawingVisual);
     }
 
+    public void setMultiplier(double multiplier) {
+        visualization.setMultiplier(multiplier);
+    }
+
+    public void setShowCircles(boolean showCircles) {
+        for (Object e : visualization.getEpicycles()) {
+            if (e instanceof Epicycle epicycle) epicycle.toggleCircles(showCircles);
+        }
+    }
+
     public void setDT(double DELTA_T) {
-        dl.DELTA_T = DELTA_T;
+        drawingLogic.DELTA_T = DELTA_T;
     }
 
     public Polyline getDrawingVisual() {
@@ -115,6 +126,6 @@ public class DrawingVisualization {
     }
 
     public Visualization getV() {
-        return v;
+        return visualization;
     }
 }

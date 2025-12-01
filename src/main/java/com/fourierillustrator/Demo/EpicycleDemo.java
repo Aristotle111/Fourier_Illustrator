@@ -48,7 +48,6 @@ public class EpicycleDemo extends Application {
         Scene scene = new Scene(root, 900, 900);
         stage.setScene(scene);      
         stage.show();
-        v.setShowCircles(true);
     }
 }
 

@@ -38,21 +38,31 @@ public class FourierLogic {
         return new Transform(epicycles, data[0] / N, data[1] / N);
     }
 
-    static double componentsToAmplitude(double c1, double c2, int size) {
+    /**
+     * Converts a pair of complex coordinates the circle amplitude
+     * @param c1 the real component
+     * @param c2 the complex component
+     * @param size the sample size
+     * @return the amplitude of the circle
+     */
+    private static double componentsToAmplitude(double c1, double c2, int size) {
         double amplitude = Math.sqrt(Math.pow(c1, 2) + Math.pow(c2, 2));
         return amplitude / size;
     }
 
-    public static void sortDescending(LinkedList<Epicycle> epicycleList) {
-    
-        // Sort the list using the List.sort() method with a custom Comparator.
+    /**
+     * Sorts a list epicycles in descending order
+     * @param epicycleList the epicycles to be
+     */
+    private static void sortDescending(LinkedList<Epicycle> epicycleList) {
         epicycleList.sort(
-            // Comparator.comparingDouble is efficient for double values.
             Comparator.comparingDouble(Epicycle::getRadius) 
-                // .reversed() flips the default ascending order to descending.
                 .reversed()
         );
     }
 
+    /**
+     * Custom data format to help store and transfer transform results
+     */
     public record Transform(LinkedList<Epicycle> epicycles, double centerX, double centerY) {}
 }
