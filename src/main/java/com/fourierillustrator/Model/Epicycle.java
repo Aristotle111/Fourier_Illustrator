@@ -115,4 +115,8 @@ public class Epicycle {
     public double getPhaseCoefficient() {
         return phase / Math.PI;
     }
+
+    public double getOmega() {
+        return omega;
+    }
 }
