@@ -6,7 +6,9 @@ import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -55,12 +57,18 @@ public class Main extends Application {
             return;
         }
         BorderPane root2 = (BorderPane) scene2.getRoot();
+
+        VBox v = (VBox) root2.getTop();
+        Button b = (Button) v.getChildren().get(1);
+        b.setDisable(true);
+
         FadeTransition fadeOut = new FadeTransition(Duration.millis(400), root2);
         fadeOut.setFromValue(1.0);
         fadeOut.setToValue(0.0);
         fadeOut.setOnFinished(e -> {
             primaryStage.setScene(scene1);
             currentScene = scene1;
+            b.setDisable(false);
             BorderPane root1 = (BorderPane) scene1.getRoot();
             root1.setOpacity(0.0);
             FadeTransition fadeIn = new FadeTransition(Duration.millis(400), root1);
@@ -105,12 +113,18 @@ public class Main extends Application {
             return;
         }
         BorderPane root1 = (BorderPane) scene1.getRoot();
+
+        VBox v = (VBox) root1.getTop();
+        Button b = (Button) v.getChildren().get(1);
+        b.setDisable(true); 
+
         FadeTransition fadeOut = new FadeTransition(Duration.millis(400), root1);
         fadeOut.setFromValue(1.0);
         fadeOut.setToValue(0.0);
         fadeOut.setOnFinished(e -> {
             primaryStage.setScene(scene2);
             currentScene = scene2;
+            b.setDisable(false);
             BorderPane root2 = (BorderPane) scene2.getRoot();
             root2.setOpacity(0.0);
             FadeTransition fadeIn = new FadeTransition(Duration.millis(400), root2);

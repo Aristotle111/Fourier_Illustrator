@@ -28,6 +28,8 @@ public class MenuController {
     @FXML
     private void openScene1() throws IOException {
         Main.setScene1FromMenu();
+        scene1Button.setDisable(true);    
+        scene2Button.setDisable(true);    
     }
 
     /**
@@ -37,6 +39,8 @@ public class MenuController {
     @FXML
     private void openScene2() throws IOException {
         Main.setScene2FromMenu();
+        scene1Button.setDisable(true);
+        scene2Button.setDisable(true);
     }
 
     /**
