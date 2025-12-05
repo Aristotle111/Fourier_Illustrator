@@ -60,6 +60,10 @@ public class PrimaryController {
         pauseButton.setDisable(true);
         resetButton.setDisable(true);
 
+        mainPane.addEventHandler(MouseEvent.MOUSE_PRESSED, eh -> {
+            drawingVisualization.clear();
+        });
+
         mainPane.addEventHandler(MouseEvent.MOUSE_DRAGGED, eh -> {
             showStrokeToggle.setSelected(false);
             showStrokeToggle.setText("Hide Original Stroke");
