@@ -102,6 +102,7 @@ public class DrawingVisualization {
      */
     public void clear() {
         pane.getChildren().clear();
+        visualization.getAnimation().stop();
         visualization = new Visualization(pane);
         drawingVisual = new Polyline();
         pane.getChildren().addAll(drawingVisual);

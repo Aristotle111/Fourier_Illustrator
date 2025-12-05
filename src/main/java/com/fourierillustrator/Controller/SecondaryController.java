@@ -23,13 +23,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Polyline;
 import javafx.util.Duration;
 
 
 public class SecondaryController {
 
     @FXML private BorderPane scene2BorderPane;
-    @FXML private Pane mainPane;
     @FXML private ChoiceBox<String> sceneSelector2;
     @FXML private VBox sceneSelectorBox2;
     @FXML private Button changeSceneButton2;
@@ -56,12 +56,25 @@ public class SecondaryController {
 
     private ArrayList<SceneTab> sceneTabs;
     private HashMap<Tab, SceneTab> tabMap;
+    private Object[] guiObjects;
 
     /**
      * Initialize key GUI elements and prepare interface for user
      */
     @FXML
     private void initialize() {
+        scene2BorderPane.setOnKeyPressed(_ -> {
+            for (Object o : getCurrentSceneTab().getPane().getChildren()) {
+                if (o instanceof Polyline pl) System.out.println("Pll");
+            }
+        });
+
+        guiObjects = new Object[]{frequencySlider, amplitudeSlider, phaseSlider, 
+                                        removeEpicycleButton, addEpicycleButton, resetButton,
+                                    pauseButton, playButton, epicycleStrokeColorPicker, 
+                                    epicycleStrokeLarge, epicycleStrokeMedium, epicycleStrokeSmall,
+                                epicycleStrokeOpacitySlider};
+
         sceneTabs = new ArrayList<>();
         tabMap = new HashMap<>();
         handleNewTab();
@@ -345,6 +358,24 @@ public class SecondaryController {
         public void updateMenu(Tab newTab) {
             ComboBox<String> comboBox = menuBox;
 
+            boolean disableGui = (newTab == null) ? true : false;
+
+            
+            for (Object o : guiObjects) {
+                if (o instanceof Button b) {
+                    if (b.getId().equals("addTabButton")) continue;
+                    b.setDisable(disableGui);
+                }
+
+                else if (o instanceof Slider s) s.setDisable(disableGui);
+
+                else if (o instanceof RadioButton r) r.setDisable(disableGui);
+            }
+
+            epicycleStrokeColorPicker.setDisable(disableGui);
+            
+            if (disableGui) return;
+
             epicycleStrokeColorPicker.setValue((Color) visualization.getPl().getStroke());
             epicycleStrokeSizeToggleGroup.selectToggle(
                 (visualization.getPl().getStrokeWidth() == 2) ? epicycleStrokeSmall :
@@ -409,6 +440,10 @@ public class SecondaryController {
             phaseSlider.setDisable(false);
         }
 
+        public Pane getPane() {
+            return pane;
+        }
+
         public Visualization getVisualization() {
             return visualization;
         }
@@ -463,6 +498,7 @@ public class SecondaryController {
     @FXML
     private void handleTabChanged() {
         Tab selectedTab = epicycleTabPane.getSelectionModel().getSelectedItem();
+        if (selectedTab == null) return;
         SceneTab sceneTab = tabMap.get(selectedTab);
         epicycleStrokeColorPicker.setValue((Color) sceneTab.visualization.getPl().getStroke());
             epicycleStrokeSizeToggleGroup.selectToggle(

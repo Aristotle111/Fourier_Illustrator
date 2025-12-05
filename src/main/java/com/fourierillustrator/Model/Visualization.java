@@ -93,10 +93,11 @@ public class Visualization {
      * @return whether the start was successful
      */
     public boolean start() {
-        polyline.getPoints().clear();
-
         if (epicycles.size() == 0) return false;
-        
+        if (animation.isPaused == false) {
+            animation.resetTime();
+            polyline.getPoints().clear();
+        }
         animation.start();
         return true;
         
@@ -131,6 +132,7 @@ public class Visualization {
         private long startTime = -1;
         private long currentTime;
         private boolean isPaused = false;
+        private double seconds;
         
         /**
          * Handles timing logic for animation
@@ -149,15 +151,18 @@ public class Visualization {
 
             if (elapsed <= DELTA_T) return;
             lastUpdate = currentTime;
-
-            double seconds = (double) multiplier * currentTime / 1_000_000_000.0;
-
-            updateEpicycles(seconds);
             
-            polyline.getPoints().addAll(new Double[]{
-            epicycles.get(epicycles.size() - 1).getEndX(), epicycles.get(epicycles.size() - 1).getEndY()  // New Point 4 (x, y)
-            });
-                
+            seconds = (double) multiplier * currentTime / 1_000_000_000.0;
+            updateEpicycles(seconds);
+            if (seconds <= 1.1) {
+               polyline.getPoints().addAll(new Double[]{
+                epicycles.get(epicycles.size() - 1).getEndX(), epicycles.get(epicycles.size() - 1).getEndY()  // New Point 4 (x, y)
+                }); 
+            }
+        }
+
+        public void resetTime() {
+            startTime = -1;
         }
     }
 
@@ -165,15 +170,29 @@ public class Visualization {
      * Resets the simulation
      */
     public void reset() {
+        javafx.scene.paint.Paint currentStroke = polyline.getStroke();
+        double currentWidth = polyline.getStrokeWidth();
+        double currentOpacity = polyline.getOpacity();
+
+        pane.getChildren().remove(polyline);
+        polyline = new Polyline();
+        polyline.setStroke(currentStroke);
+        polyline.setStrokeWidth(currentWidth);
+        polyline.setOpacity(currentOpacity);
+        pane.getChildren().add(0, polyline);
+
         updateEpicycles(0);
-        polyline.getPoints().clear();
         animation.stop();
+        animation.isPaused = false;
         animation.startTime = -1;
     }
 
     public void setCenter(double centerX, double centerY) {
         this.centerX = centerX;
         this.centerY = centerY;
+    }
+    public AnimationTimer getAnimation() {
+        return animation;
     }
 
     public void setMultiplier(double multiplier) {

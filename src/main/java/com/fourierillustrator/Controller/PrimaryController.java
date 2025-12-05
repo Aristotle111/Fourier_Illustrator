@@ -19,6 +19,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 public class PrimaryController {
 
@@ -47,6 +48,11 @@ public class PrimaryController {
     @FXML
     private void initialize() {
         drawingVisualization = new DrawingVisualization(mainPane);
+        Rectangle clipRect = new Rectangle();
+        clipRect.widthProperty().bind(mainPane.widthProperty());
+        clipRect.heightProperty().bind(mainPane.heightProperty());
+        mainPane.setClip(clipRect);
+        
         handleEpicyclesToggled();
         handleDrawingSpeedChanged();
 
