@@ -1,6 +1,7 @@
 package com.fourierillustrator.Main;
 
 import java.io.IOException;
+import java.net.URL;
 
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
@@ -9,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -18,6 +21,11 @@ public class Main extends Application {
     private static Scene scene2;
     private static Scene currentScene;
     private static Stage primaryStage;
+    private static MediaPlayer player;
+    private static Media media;
+    
+    public static boolean audioPlaying = true;
+    
     public static void main(String[] args) {
         launch(args);
     }
@@ -25,6 +33,14 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Main.primaryStage = primaryStage;
+
+        String audioPathStr = "/com/fourierillustrator/View/audio/menu_music.mp3";
+        URL audioURL = Main.class.getResource(audioPathStr);
+        media = new Media(audioURL.toString());
+        player = new MediaPlayer(media);
+        player.setCycleCount(MediaPlayer.INDEFINITE);
+        player.setVolume(0.1);
+        player.play();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/fourierillustrator/View/menu.fxml"));
         BorderPane menuRoot = loader.load();
@@ -77,6 +93,8 @@ public class Main extends Application {
             fadeIn.play();
         });
         fadeOut.play();
+
+        pauseAudio();
     }
 
     /**
@@ -102,6 +120,8 @@ public class Main extends Application {
             fadeIn.play();
         });
         fadeOut.play();
+
+        pauseAudio();
     }
 
     /**
@@ -133,6 +153,8 @@ public class Main extends Application {
             fadeIn.play();
         });
         fadeOut.play();
+
+        pauseAudio();
     }
 
     /**
@@ -158,5 +180,21 @@ public class Main extends Application {
             fadeIn.play();
         });
         fadeOut.play();
+
+        pauseAudio();
+    }
+        
+    public static void playAudio() {
+        player.play();
+        audioPlaying = true;
+    }
+        
+    public static void pauseAudio() {
+        player.pause();
+        audioPlaying = false;
+    }
+
+    public static boolean isAudioPlaying() {
+        return audioPlaying;
     }
 }

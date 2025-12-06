@@ -7,6 +7,8 @@ import com.fourierillustrator.Main.Main;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class MenuController {
 
@@ -14,9 +16,17 @@ public class MenuController {
     @FXML private Button scene2Button;
     @FXML private ImageView button1Border;
     @FXML private ImageView button2Border;
+    @FXML private ImageView audioOnImage;
+    @FXML private ImageView audioOffImage;
+
+    private MediaPlayer player;
+    private Media media;
 
     @FXML
     private void initialize() {
+        audioOnImage.setVisible(true);
+        audioOffImage.setVisible(false);
+
         button1Border.setVisible(false);
         button2Border.setVisible(false);
     }
@@ -73,5 +83,18 @@ public class MenuController {
     @FXML
     private void button2Exited() {
         button2Border.setVisible(false);
+    }
+
+    @FXML
+    private void handlePlayPause() {
+        if (Main.isAudioPlaying()) {
+            Main.pauseAudio();
+            audioOnImage.setVisible(false);
+            audioOffImage.setVisible(true);
+        } else {
+            Main.playAudio();
+            audioOnImage.setVisible(true);
+            audioOffImage.setVisible(false);
+        }
     }
 }

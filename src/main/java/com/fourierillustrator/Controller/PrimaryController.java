@@ -14,6 +14,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -42,6 +43,8 @@ public class PrimaryController {
     @FXML private ToggleButton hideEpicyclesToggleButton;
     @FXML private ColorPicker colorSelector;
     @FXML private Label epicycleCount;
+    @FXML private ImageView audioOnImage;
+    @FXML private ImageView audioOffImage;
 
     private DrawingVisualization drawingVisualization;
     

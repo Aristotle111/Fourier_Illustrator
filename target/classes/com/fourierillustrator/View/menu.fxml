@@ -36,7 +36,7 @@
          <children>
             <VBox alignment="CENTER" prefHeight="543.0" prefWidth="750.0" style="-fx-background-color: white;">
                <children>
-                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                  <StackPane prefHeight="360.0" prefWidth="750.0">
                      <children>
                         <ImageView fx:id="button1Border" fitHeight="110.0" fitWidth="220.0" pickOnBounds="true" visible="false">
                            <image>
@@ -68,7 +68,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="543.0" prefWidth="750.0" style="-fx-background-color: white;">
                <children>
-                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                  <StackPane prefHeight="360.0" prefWidth="750.0">
                      <children>
                         <ImageView fx:id="button2Border" fitHeight="110.0" fitWidth="220.0" pickOnBounds="true" visible="false">
                            <image>
@@ -94,6 +94,22 @@
                               <Insets bottom="200.0" />
                            </StackPane.margin>
                         </Label>
+                        <ImageView fx:id="audioOnImage" fitHeight="45.0" fitWidth="45.0" onMouseClicked="#handlePlayPause" pickOnBounds="true" preserveRatio="true">
+                           <StackPane.margin>
+                              <Insets left="689.0" top="300.0" />
+                           </StackPane.margin>
+                           <image>
+                              <Image url="@images/audio_on.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="audioOffImage" fitHeight="45.0" fitWidth="45.0" layoutX="708.0" layoutY="318.0" onMouseClicked="#handlePlayPause" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/audio_off.png" />
+                           </image>
+                           <StackPane.margin>
+                              <Insets left="690.0" top="298.0" />
+                           </StackPane.margin>
+                        </ImageView>
                      </children>
                   </StackPane>
                </children>

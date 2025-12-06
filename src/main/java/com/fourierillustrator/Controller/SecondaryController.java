@@ -19,6 +19,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -53,6 +54,8 @@ public class SecondaryController {
     @FXML private Tooltip frequencyTooltip;
     @FXML private Tooltip amplitudeTooltip;
     @FXML private Tooltip phaseTooltip;
+    @FXML private ImageView audioOnImage;
+    @FXML private ImageView audioOffImage;
 
     private ArrayList<SceneTab> sceneTabs;
     private HashMap<Tab, SceneTab> tabMap;
@@ -507,5 +510,18 @@ public class SecondaryController {
                 epicycleStrokeLarge
             );
             epicycleStrokeOpacitySlider.setValue(sceneTab.visualization.getPl().getOpacity());
+    }
+
+    @FXML
+    private void handlePlayPause() {
+        if (audioOnImage.isVisible()) {
+            audioOnImage.setVisible(false);
+            audioOffImage.setVisible(true);
+            Main.pauseAudio();
+            return;
+        }
+        audioOnImage.setVisible(true);
+        audioOffImage.setVisible(false);
+        Main.playAudio();
     }
 }
