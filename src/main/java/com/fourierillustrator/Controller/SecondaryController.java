@@ -66,12 +66,6 @@ public class SecondaryController {
      */
     @FXML
     private void initialize() {
-        scene2BorderPane.setOnKeyPressed(_ -> {
-            for (Object o : getCurrentSceneTab().getPane().getChildren()) {
-                if (o instanceof Polyline pl) System.out.println("Pll");
-            }
-        });
-
         guiObjects = new Object[]{frequencySlider, amplitudeSlider, phaseSlider, 
                                         removeEpicycleButton, addEpicycleButton, resetButton,
                                     pauseButton, playButton, epicycleStrokeColorPicker, 

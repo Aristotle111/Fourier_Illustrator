@@ -46,7 +46,7 @@ public class Visualization {
         setEpicycles(epicycles);
         animation = new VisualLogic();
         
-        polyline = new Polyline();
+        polyline = new Polyline();          
         polyline.setStroke(Color.BLACK);
         polyline.setStrokeWidth(5);
         pane.getChildren().add(polyline);
@@ -151,7 +151,7 @@ public class Visualization {
 
             if (elapsed <= DELTA_T) return;
             lastUpdate = currentTime;
-            
+
             seconds = (double) multiplier * currentTime / 1_000_000_000.0;
             updateEpicycles(seconds);
             if (seconds <= 1.1) {

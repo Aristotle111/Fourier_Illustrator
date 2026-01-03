@@ -65,6 +65,7 @@ public class PrimaryController {
 
         mainPane.addEventHandler(MouseEvent.MOUSE_PRESSED, eh -> {
             drawingVisualization.clear();
+            handleDrawingSpeedChanged();
         });
 
         mainPane.addEventHandler(MouseEvent.MOUSE_DRAGGED, eh -> {
@@ -92,6 +93,7 @@ public class PrimaryController {
             showStrokeToggle.setText("Hide Original Stroke");
             epicycleCount.setText("NONE");
             drawingVisualization.clear();
+            handleDrawingSpeedChanged();
             handlePointDensityChanged();
             handleDrawingSpeedChanged();
             handleColorChanged();
@@ -129,6 +131,7 @@ public class PrimaryController {
         pointDensitySlider.setDisable(false);
         epicycleCount.setText("NONE");
         drawingVisualization.clear();
+        handleDrawingSpeedChanged();
         handlePointDensityChanged();
         handleDrawingSpeedChanged();
     }
